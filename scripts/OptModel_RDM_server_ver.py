@@ -28,48 +28,26 @@ import logging
 import copy
 import random
 import pickle
+import sys
+
+# Set Paths
+SCRIPTS_DIR = os.path.dirname(os.path.realpath(__file__))
+PARENT_DIR = os.path.dirname(SCRIPTS_DIR)
+WORKING_DIR_ALL_PATH = os.path.join(PARENT_DIR, 'copias_generadas_all')
+OUTPUT_DIR_PATH = os.path.join(PARENT_DIR, 'model_results')
+CSV_DIR_PATH = os.path.join(SCRIPTS_DIR, 'csv_files')
+
+# Read arguments from the command line
+if len(sys.argv) > 1:
+    working_dir_name = sys.argv[1]
+    working_dir_path = os.path.join(WORKING_DIR_ALL_PATH, working_dir_name)
+else:
+    print("No model name provided. Exiting...")
+    sys.exit(1)
+
 
 # Set the seed for reproducibility
 SEED = 12345
-
-# Definir los directorios de trabajo divididos en bloques
-directorios_trabajo = [
-    "./copias_generadas_1",
-    "./copias_generadas_2",
-    "./copias_generadas_3",
-    "./copias_generadas_4",
-    "./copias_generadas_5",
-    "./copias_generadas_6",
-    "./copias_generadas_7",
-    "./copias_generadas_8",
-    "./copias_generadas_9",
-    "./copias_generadas_10",
-    "./copias_generadas_11",
-    "./copias_generadas_12",
-    "./copias_generadas_13",
-    "./copias_generadas_14",
-    "./copias_generadas_15",
-    "./copias_generadas_16",
-    "./copias_generadas_17",
-    "./copias_generadas_18",
-    "./copias_generadas_19",
-    "./copias_generadas_20",
-    "./copias_generadas_21",
-    "./copias_generadas_22",
-    "./copias_generadas_23",
-    "./copias_generadas_24",
-    "./copias_generadas_25",
-    "./copias_generadas_26",
-    "./copias_generadas_27"#,
-    # "./copias_generadas_pd",
-    # "pruebas_2.0",
-    # "pruebas_2.0_v2",
-    # "pruebas_2.0_v3",
-    # "pruebas_2.0_v4",
-    # "pruebas_2.2_v1",
-    # "prueba_2.3",
-    # "prueba_2.4"
-]
 
 # logger = logging.getLogger(__name__)
 
@@ -85,17 +63,17 @@ directorios_trabajo = [
 # print = logging.info
 
 # Ruta del directorio de resultados
-result_directory = "./model_results_pruebas_2.4_v3-4"
+result_directory = os.path.join(OUTPUT_DIR_PATH, working_dir_name)
 
 # Crear el directorio de resultados si no existe
 if not os.path.exists(result_directory):
     os.makedirs(result_directory)
 
 # Cargar el archivo CSV, especificando que el delimitador es ';'
-supply_ts = pd.read_csv("supply.csv", delimiter=";")
-demand_ts = pd.read_csv("demand.csv", delimiter=";")
-anc_ts = pd.read_csv("anc.csv", delimiter=";")
-projects = pd.read_csv("projects_final_v4.csv", delimiter=";")
+supply_ts = pd.read_csv(os.path.join(CSV_DIR_PATH, "supply.csv"), delimiter=";")
+demand_ts = pd.read_csv(os.path.join(CSV_DIR_PATH, "demand.csv"), delimiter=";")
+anc_ts = pd.read_csv(os.path.join(CSV_DIR_PATH, "anc.csv"), delimiter=";")
+projects = pd.read_csv(os.path.join(CSV_DIR_PATH, "projects_final_v4.csv"), delimiter=";")
 
 # Revisar cómo se interpretan las fechas antes de modificarlas
 # print(supply_ts.head())  # Asegúrate de que la columna 'Date' esté en el formato correcto.
@@ -107,9 +85,9 @@ demand_ts['Date'] = pd.to_datetime(demand_ts['Date'], format='%d/%m/%Y', dayfirs
 anc_ts['Date'] = pd.to_datetime(anc_ts['Date'], format='%d/%m/%Y', dayfirst=True)
 
 # Guardar de nuevo el archivo CSV con el formato correcto
-supply_ts.to_csv("supply_corrected.csv", index=False)
-demand_ts.to_csv("demand_corrected.csv", index=False)
-anc_ts.to_csv("anc_corrected.csv", index=False)
+supply_ts.to_csv(os.path.join(CSV_DIR_PATH, "supply_corrected.csv"), index=False)
+demand_ts.to_csv(os.path.join(CSV_DIR_PATH, "demand_corrected.csv"), index=False)
+anc_ts.to_csv(os.path.join(CSV_DIR_PATH, "anc_corrected.csv"), index=False)
 
 class custom_HUX(Variator):
 
@@ -855,30 +833,30 @@ evaluator = MapEvaluator()
 # Ejecutar el modelo con cada archivo JSON en el directorio
 # Ejecutar el modelo en cada directorio, con pausas entre bloques
 
-for directorio in directorios_trabajo:
-    print(f"Procesando archivos en {directorio}")
+# TODO: Adapt this for single runs and batch processing
+
+
+print(f"Procesando archivos en {working_dir_name}...")
+
+# Obtener lista de archivos JSON en el directorio
+json_files = [f for f in os.listdir(working_dir_path) if f.endswith(".json")]
+
+# Procesar cada archivo JSON en el directorio
+for json_file in json_files:
+    json_path = os.path.join(working_dir_path, json_file)
+    base_filename = os.path.splitext(json_file)[0]
+
+    # Set the result paths for the current JSON file
+    result_csv_path = os.path.join(result_directory, f"{base_filename}.csv")
+    result_plot_path = os.path.join(result_directory, f"{base_filename}.png")
     
-    # Obtener lista de archivos JSON en el directorio
-    json_files = [f for f in os.listdir(directorio) if f.endswith(".json")]
+    # Set seed for reproducibility
+    print(f"Estableciendo semilla = {SEED}")
+    random.seed(SEED)           # Python's random module
+    np.random.seed(SEED)        # NumPy's random module
     
-    # Procesar cada archivo JSON en el directorio
-    for json_file in json_files:
-        json_path = os.path.join(directorio, json_file)
-        base_filename = os.path.splitext(json_file)[0]
-        result_csv_path = os.path.join(result_directory, f"{base_filename}.csv")
-        result_plot_path = os.path.join(result_directory, f"{base_filename}.png")
-        
-        # Set seed for reproducibility
-        print(f"Estableciendo semilla = {SEED}")
-        random.seed(SEED)           # Python's random module
-        np.random.seed(SEED)        # NumPy's random module
-        
-        # Ejecutar el modelo y guardar resultados
-        run_model_with_json(json_path, result_csv_path, result_plot_path)
-        
-        # Setting new seed value
-        SEED = SEED + 1
+    # Ejecutar el modelo y guardar resultados
+    run_model_with_json(json_path, result_csv_path, result_plot_path)
     
-    # # Descanso entre bloques de directorios
-    # print(f"Descansando después de procesar {directorio}...")
-    # time.sleep(300)  # Descanso de 5 minutos (300 segundos) entre bloques
+    # Setting new seed value
+    SEED = SEED + 1

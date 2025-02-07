@@ -2733,22 +2733,22 @@
     },
     "tables": {
         "supply": {
-            "url": "supply_corrected.csv",
+            "url": "csv_files/supply_corrected.csv",
             "index_col": "Date",
             "parse_dates": true
         },
         "demand": {
-            "url": "demand_corrected.csv",
+            "url": "csv_files/demand_corrected.csv",
             "index_col": "Date",
             "parse_dates": true
         },
         "nrw": {
-            "url": "anc_corrected.csv",
+            "url": "csv_files/anc_corrected.csv",
             "index_col": "Date",
             "parse_dates": true
         },
         "projects": {
-            "url": "projects_final_v4.csv",
+            "url": "csv_files/projects_final_v4.csv",
             "index_col": "project_ID",
             "sep": ";"
         }

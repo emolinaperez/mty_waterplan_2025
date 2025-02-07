@@ -1,0 +1,3032 @@
+{
+    "metadata": {
+        "title": "Modelo de optimizaci\u00f3n",
+        "description": "Modelo optimizable con universo de proyectos ajustado a retroalimentaci\u00f3n. Cambios en Acu\u00edfero Buenos Aires y agua tratada Dulces Nombres - La Boca. 27 proyectos resultantes.",
+        "minimum_version": "2.0"
+    },
+    "timestepper": {
+        "start": "2025-01-01",
+        "end": "2050-12-31",
+        "timestep": "M"
+    },
+    "nodes": [
+        {
+            "name": "oferta_BAU",
+            "type": "input",
+            "max_flow": "oferta_sostenible_BAU",
+            "cost": 12
+        },
+        {
+            "name": "oferta_P1",
+            "type": "input",
+            "max_flow": "oferta_activada_P1",
+            "cost": -1
+        },
+        {
+            "name": "oferta_P2",
+            "type": "input",
+            "max_flow": "oferta_activada_P2",
+            "cost": -1
+        },
+        {
+            "name": "oferta_P3",
+            "type": "input",
+            "max_flow": "oferta_activada_P3",
+            "cost": -1
+        },
+        {
+            "name": "oferta_P4",
+            "type": "input",
+            "max_flow": "oferta_activada_P4",
+            "cost": -1
+        },
+        {
+            "name": "oferta_P5",
+            "type": "input",
+            "max_flow": "oferta_activada_P5",
+            "cost": -1
+        },
+        {
+            "name": "oferta_P6",
+            "type": "input",
+            "max_flow": "oferta_activada_P6",
+            "cost": -1
+        },
+        {
+            "name": "oferta_P7",
+            "type": "input",
+            "max_flow": "oferta_activada_P7",
+            "cost": -1
+        },
+        {
+            "name": "oferta_P8",
+            "type": "input",
+            "max_flow": "oferta_activada_P8",
+            "cost": -1
+        },
+        {
+            "name": "oferta_P9",
+            "type": "input",
+            "max_flow": "oferta_activada_P9",
+            "cost": -1
+        },
+        {
+            "name": "oferta_P10",
+            "type": "input",
+            "max_flow": "oferta_activada_P10",
+            "cost": -1
+        },
+        {
+            "name": "oferta_P11",
+            "type": "input",
+            "max_flow": "oferta_activada_P11",
+            "cost": -1
+        },
+        {
+            "name": "oferta_P12",
+            "type": "input",
+            "max_flow": "oferta_activada_P12",
+            "cost": -1
+        },
+        {
+            "name": "oferta_P13",
+            "type": "input",
+            "max_flow": "oferta_activada_P13",
+            "cost": -1
+        },
+        {
+            "name": "oferta_P14",
+            "type": "input",
+            "max_flow": "oferta_activada_P14",
+            "cost": -1
+        },
+        {
+            "name": "oferta_P15",
+            "type": "input",
+            "max_flow": "oferta_activada_P15",
+            "cost": -1
+        },
+        {
+            "name": "oferta_P16",
+            "type": "input",
+            "max_flow": "oferta_activada_P16",
+            "cost": -1
+        },
+        {
+            "name": "oferta_P17",
+            "type": "input",
+            "max_flow": "oferta_activada_P17",
+            "cost": -1
+        },
+        {
+            "name": "oferta_P18",
+            "type": "input",
+            "max_flow": "oferta_activada_P18",
+            "cost": -1
+        },
+        {
+            "name": "oferta_P19",
+            "type": "input",
+            "max_flow": "oferta_activada_P19",
+            "cost": -1
+        },
+        {
+            "name": "oferta_P20",
+            "type": "input",
+            "max_flow": "oferta_activada_P20",
+            "cost": -1
+        },
+        {
+            "name": "oferta_P21",
+            "type": "input",
+            "max_flow": "oferta_activada_P21",
+            "cost": -1
+        },
+        {
+            "name": "oferta_P22",
+            "type": "input",
+            "max_flow": "oferta_activada_P22",
+            "cost": -1
+        },
+        {
+            "name": "oferta_P23",
+            "type": "input",
+            "max_flow": "oferta_activada_P23",
+            "cost": -1
+        },
+        {
+            "name": "oferta_P24",
+            "type": "input",
+            "max_flow": "oferta_activada_P24",
+            "cost": -1
+        },
+        {
+            "name": "oferta_P25",
+            "type": "input",
+            "max_flow": "oferta_activada_P25",
+            "cost": -1
+        },
+        {
+            "name": "oferta_P26",
+            "type": "input",
+            "max_flow": "oferta_activada_P26",
+            "cost": -1
+        },
+        {
+            "name": "oferta_P27",
+            "type": "input",
+            "max_flow": "oferta_activada_P27",
+            "cost": -1
+        },
+        {
+            "name": "oferta_P1_delayed",
+            "type": "DelayNode",
+            "timesteps": 60,
+            "cost": -1
+        },
+        {
+            "name": "oferta_P2_delayed",
+            "type": "DelayNode",
+            "timesteps": 60,
+            "cost": -1
+        },
+        {
+            "name": "oferta_P3_delayed",
+            "type": "DelayNode",
+            "timesteps": 60,
+            "cost": -1
+        },
+        {
+            "name": "oferta_P4_delayed",
+            "type": "DelayNode",
+            "timesteps": 72,
+            "cost": -1
+        },
+        {
+            "name": "oferta_P5_delayed",
+            "type": "DelayNode",
+            "timesteps": 24,
+            "cost": -1
+        },
+        {
+            "name": "oferta_P6_delayed",
+            "type": "DelayNode",
+            "timesteps": 48,
+            "cost": -1
+        },
+        {
+            "name": "oferta_P7_delayed",
+            "type": "DelayNode",
+            "timesteps": 48,
+            "cost": -1
+        },
+        {
+            "name": "oferta_P8_delayed",
+            "type": "DelayNode",
+            "timesteps": 48,
+            "cost": -1
+        },
+        {
+            "name": "oferta_P9_delayed",
+            "type": "DelayNode",
+            "timesteps": 48,
+            "cost": -1
+        },
+        {
+            "name": "oferta_P10_delayed",
+            "type": "DelayNode",
+            "timesteps": 48,
+            "cost": -1
+        },
+        {
+            "name": "oferta_P11_delayed",
+            "type": "DelayNode",
+            "timesteps": 48,
+            "cost": -1
+        },
+        {
+            "name": "oferta_P12_delayed",
+            "type": "DelayNode",
+            "timesteps": 48,
+            "cost": -1
+        },
+        {
+            "name": "oferta_P13_delayed",
+            "type": "DelayNode",
+            "timesteps": 48,
+            "cost": -1
+        },
+        {
+            "name": "oferta_P14_delayed",
+            "type": "DelayNode",
+            "timesteps": 60,
+            "cost": -1
+        },
+        {
+            "name": "oferta_P15_delayed",
+            "type": "DelayNode",
+            "timesteps": 120,
+            "cost": -1
+        },
+        {
+            "name": "oferta_P16_delayed",
+            "type": "DelayNode",
+            "timesteps": 72,
+            "cost": -1
+        },
+        {
+            "name": "oferta_P17_delayed",
+            "type": "DelayNode",
+            "timesteps": 192,
+            "cost": -1
+        },
+        {
+            "name": "oferta_P18_delayed",
+            "type": "DelayNode",
+            "timesteps": 84,
+            "cost": -1
+        },
+        {
+            "name": "oferta_P19_delayed",
+            "type": "DelayNode",
+            "timesteps": 84,
+            "cost": -1
+        },
+        {
+            "name": "oferta_P20_delayed",
+            "type": "DelayNode",
+            "timesteps": 120,
+            "cost": -1
+        },
+        {
+            "name": "oferta_P21_delayed",
+            "type": "DelayNode",
+            "timesteps": 84,
+            "cost": -1
+        },
+        {
+            "name": "oferta_P22_delayed",
+            "type": "DelayNode",
+            "timesteps": 72,
+            "cost": -1
+        },
+        {
+            "name": "oferta_P23_delayed",
+            "type": "DelayNode",
+            "timesteps": 48,
+            "cost": -1
+        },
+        {
+            "name": "oferta_P24_delayed",
+            "type": "DelayNode",
+            "timesteps": 120,
+            "cost": -1
+        },
+        {
+            "name": "oferta_P25_delayed",
+            "type": "DelayNode",
+            "timesteps": 12,
+            "cost": -1
+        },
+        {
+            "name": "oferta_P26_delayed",
+            "type": "DelayNode",
+            "timesteps": 48,
+            "cost": -1
+        },
+        {
+            "name": "oferta_P27_delayed",
+            "type": "DelayNode",
+            "timesteps": 36,
+            "cost": -1
+        },
+        {
+            "name": "transferencia",
+            "type": "BreakLink"
+        },
+        {
+            "name": "demanda",
+            "type": "output",
+            "max_flow": "demanda_req",
+            "cost": -25
+        },
+        {
+            "name": "anc",
+            "type": "output",
+            "max_flow": "anc_req",
+            "cost": -26
+        },
+        {
+            "name": "max_flow_agua_de_reuso",
+            "type": "AggregatedNode",
+            "nodes": [
+                "oferta_P6",
+                "oferta_P7",
+                "oferta_P8",
+                "oferta_P9",
+                "oferta_P10",
+                "oferta_P11",
+                "oferta_P12",
+                "oferta_P13"
+            ],
+            "max_flow": "agua_residual_a_reuso_abs"
+        },
+        {
+            "name": "dummy",
+            "type": "output",
+            "cost": 1
+        }
+    ],
+    "edges": [
+        [
+            "oferta_BAU",
+            "transferencia"
+        ],
+        [
+            "oferta_P1",
+            "oferta_P1_delayed"
+        ],
+        [
+            "oferta_P2",
+            "oferta_P2_delayed"
+        ],
+        [
+            "oferta_P3",
+            "oferta_P3_delayed"
+        ],
+        [
+            "oferta_P4",
+            "oferta_P4_delayed"
+        ],
+        [
+            "oferta_P5",
+            "oferta_P5_delayed"
+        ],
+        [
+            "oferta_P6",
+            "oferta_P6_delayed"
+        ],
+        [
+            "oferta_P7",
+            "oferta_P7_delayed"
+        ],
+        [
+            "oferta_P8",
+            "oferta_P8_delayed"
+        ],
+        [
+            "oferta_P9",
+            "oferta_P9_delayed"
+        ],
+        [
+            "oferta_P10",
+            "oferta_P10_delayed"
+        ],
+        [
+            "oferta_P11",
+            "oferta_P11_delayed"
+        ],
+        [
+            "oferta_P12",
+            "oferta_P12_delayed"
+        ],
+        [
+            "oferta_P13",
+            "oferta_P13_delayed"
+        ],
+        [
+            "oferta_P14",
+            "oferta_P14_delayed"
+        ],
+        [
+            "oferta_P15",
+            "oferta_P15_delayed"
+        ],
+        [
+            "oferta_P16",
+            "oferta_P16_delayed"
+        ],
+        [
+            "oferta_P17",
+            "oferta_P17_delayed"
+        ],
+        [
+            "oferta_P18",
+            "oferta_P18_delayed"
+        ],
+        [
+            "oferta_P19",
+            "oferta_P19_delayed"
+        ],
+        [
+            "oferta_P20",
+            "oferta_P20_delayed"
+        ],
+        [
+            "oferta_P21",
+            "oferta_P21_delayed"
+        ],
+        [
+            "oferta_P22",
+            "oferta_P22_delayed"
+        ],
+        [
+            "oferta_P23",
+            "oferta_P23_delayed"
+        ],
+        [
+            "oferta_P24",
+            "oferta_P24_delayed"
+        ],
+        [
+            "oferta_P25",
+            "oferta_P25_delayed"
+        ],
+        [
+            "oferta_P26",
+            "oferta_P26_delayed"
+        ],
+        [
+            "oferta_P27",
+            "oferta_P27_delayed"
+        ],
+        [
+            "oferta_P1_delayed",
+            "transferencia"
+        ],
+        [
+            "oferta_P2_delayed",
+            "transferencia"
+        ],
+        [
+            "oferta_P3_delayed",
+            "transferencia"
+        ],
+        [
+            "oferta_P4_delayed",
+            "transferencia"
+        ],
+        [
+            "oferta_P5_delayed",
+            "transferencia"
+        ],
+        [
+            "oferta_P6_delayed",
+            "transferencia"
+        ],
+        [
+            "oferta_P7_delayed",
+            "transferencia"
+        ],
+        [
+            "oferta_P8_delayed",
+            "transferencia"
+        ],
+        [
+            "oferta_P9_delayed",
+            "transferencia"
+        ],
+        [
+            "oferta_P10_delayed",
+            "transferencia"
+        ],
+        [
+            "oferta_P11_delayed",
+            "transferencia"
+        ],
+        [
+            "oferta_P12_delayed",
+            "transferencia"
+        ],
+        [
+            "oferta_P13_delayed",
+            "transferencia"
+        ],
+        [
+            "oferta_P14_delayed",
+            "transferencia"
+        ],
+        [
+            "oferta_P15_delayed",
+            "transferencia"
+        ],
+        [
+            "oferta_P16_delayed",
+            "transferencia"
+        ],
+        [
+            "oferta_P17_delayed",
+            "transferencia"
+        ],
+        [
+            "oferta_P18_delayed",
+            "transferencia"
+        ],
+        [
+            "oferta_P19_delayed",
+            "transferencia"
+        ],
+        [
+            "oferta_P20_delayed",
+            "transferencia"
+        ],
+        [
+            "oferta_P21_delayed",
+            "transferencia"
+        ],
+        [
+            "oferta_P22_delayed",
+            "transferencia"
+        ],
+        [
+            "oferta_P23_delayed",
+            "transferencia"
+        ],
+        [
+            "oferta_P24_delayed",
+            "transferencia"
+        ],
+        [
+            "oferta_P25_delayed",
+            "transferencia"
+        ],
+        [
+            "oferta_P26_delayed",
+            "transferencia"
+        ],
+        [
+            "oferta_P27_delayed",
+            "transferencia"
+        ],
+        [
+            "transferencia",
+            "demanda"
+        ],
+        [
+            "transferencia",
+            "anc"
+        ],
+        [
+            "transferencia",
+            "dummy"
+        ]
+    ],
+    "parameters": {
+        "transf_marte_r_gomez": {
+            "type": "constant",
+            "value": -6
+        },
+        "ventas_ww_industria": {
+            "type": "constant",
+            "value": -2
+        },
+        "reserva_de_planeacion": {
+            "type": "constant",
+            "value": 1.5
+        },
+        "deficit_demand": {
+            "type": "deficit",
+            "node": "demanda"
+        },
+        "deficit_anc": {
+            "type": "deficit",
+            "node": "anc"
+        },
+        "demanda_req": {
+            "type": "dataframe",
+            "table": "demand",
+            "column": "ANCTEND_CLIMRCP85_ECOACE"
+        },
+        "anc_req": {
+            "type": "dataframe",
+            "table": "nrw",
+            "column": "ANCTEND_CLIMRCP85_ECOACE"
+        },
+        "flujo_demanda": {
+            "type": "FlowParameter",
+            "node": "demanda"
+        },
+        "flujo_anc": {
+            "type": "FlowParameter",
+            "node": "anc"
+        },
+        "flujo_demanda_total": {
+            "type": "aggregated",
+            "agg_func": "sum",
+            "parameters": [
+                "flujo_demanda",
+                "flujo_anc"
+            ]
+        },
+        "flujo_demanda_total_negativo": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "flujo_demanda_total",
+                -1
+            ]
+        },
+        "demanda_a_agua_residual": {
+            "type": "FlowParameter",
+            "node": "demanda"
+        },
+        "agua_residual": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "demanda_a_agua_residual",
+                0.75
+            ]
+        },
+        "agua_residual_a_reuso": {
+            "type": "aggregated",
+            "agg_func": "sum",
+            "parameters": [
+                "agua_residual",
+                "transf_marte_r_gomez",
+                "ventas_ww_industria"
+            ]
+        },
+        "agua_residual_a_reuso_abs": {
+            "type": "aggregated",
+            "agg_func": "max",
+            "parameters": [
+                "agua_residual_a_reuso",
+                0
+            ]
+        },
+        "oferta_sostenible_BAU": {
+            "type": "dataframe",
+            "table": "supply",
+            "column": "6B, 0.97"
+        },
+        "oferta_sostenible_P1": {
+            "type": "constant",
+            "table": "projects",
+            "column": "expected_flow",
+            "index": "P1"
+        },
+        "oferta_sostenible_P2": {
+            "type": "constant",
+            "table": "projects",
+            "column": "expected_flow",
+            "index": "P2"
+        },
+        "oferta_sostenible_P3": {
+            "type": "constant",
+            "table": "projects",
+            "column": "expected_flow",
+            "index": "P3"
+        },
+        "oferta_sostenible_P4": {
+            "type": "constant",
+            "table": "projects",
+            "column": "expected_flow",
+            "index": "P4"
+        },
+        "oferta_sostenible_P5": {
+            "type": "constant",
+            "table": "projects",
+            "column": "expected_flow",
+            "index": "P5"
+        },
+        "oferta_sostenible_P6": {
+            "type": "constant",
+            "table": "projects",
+            "column": "expected_flow",
+            "index": "P6"
+        },
+        "oferta_sostenible_P7": {
+            "type": "constant",
+            "table": "projects",
+            "column": "expected_flow",
+            "index": "P7"
+        },
+        "oferta_sostenible_P8": {
+            "type": "constant",
+            "table": "projects",
+            "column": "expected_flow",
+            "index": "P8"
+        },
+        "oferta_sostenible_P9": {
+            "type": "constant",
+            "table": "projects",
+            "column": "expected_flow",
+            "index": "P9"
+        },
+        "oferta_sostenible_P10": {
+            "type": "constant",
+            "table": "projects",
+            "column": "expected_flow",
+            "index": "P10"
+        },
+        "oferta_sostenible_P11": {
+            "type": "constant",
+            "table": "projects",
+            "column": "expected_flow",
+            "index": "P11"
+        },
+        "oferta_sostenible_P12": {
+            "type": "constant",
+            "table": "projects",
+            "column": "expected_flow",
+            "index": "P12"
+        },
+        "oferta_sostenible_P13": {
+            "type": "constant",
+            "table": "projects",
+            "column": "expected_flow",
+            "index": "P13"
+        },
+        "oferta_sostenible_P14": {
+            "type": "constant",
+            "table": "projects",
+            "column": "expected_flow",
+            "index": "P14"
+        },
+        "oferta_sostenible_P15": {
+            "type": "constant",
+            "table": "projects",
+            "column": "expected_flow",
+            "index": "P15"
+        },
+        "oferta_sostenible_P16": {
+            "type": "constant",
+            "table": "projects",
+            "column": "expected_flow",
+            "index": "P16"
+        },
+        "oferta_sostenible_P17": {
+            "type": "constant",
+            "table": "projects",
+            "column": "expected_flow",
+            "index": "P17"
+        },
+        "oferta_sostenible_P18": {
+            "type": "constant",
+            "table": "projects",
+            "column": "expected_flow",
+            "index": "P18"
+        },
+        "oferta_sostenible_P19": {
+            "type": "constant",
+            "table": "projects",
+            "column": "expected_flow",
+            "index": "P19"
+        },
+        "oferta_sostenible_P20": {
+            "type": "constant",
+            "table": "projects",
+            "column": "expected_flow",
+            "index": "P20"
+        },
+        "oferta_sostenible_P21": {
+            "type": "constant",
+            "table": "projects",
+            "column": "expected_flow",
+            "index": "P21"
+        },
+        "oferta_sostenible_P22": {
+            "type": "constant",
+            "table": "projects",
+            "column": "expected_flow",
+            "index": "P22"
+        },
+        "oferta_sostenible_P23": {
+            "type": "constant",
+            "table": "projects",
+            "column": "expected_flow",
+            "index": "P23"
+        },
+        "oferta_sostenible_P24": {
+            "type": "constant",
+            "table": "projects",
+            "column": "expected_flow",
+            "index": "P24"
+        },
+        "oferta_sostenible_P25": {
+            "type": "constant",
+            "table": "projects",
+            "column": "expected_flow",
+            "index": "P25"
+        },
+        "oferta_sostenible_P26": {
+            "type": "constant",
+            "table": "projects",
+            "column": "expected_flow",
+            "index": "P26"
+        },
+        "oferta_sostenible_P27": {
+            "type": "constant",
+            "table": "projects",
+            "column": "expected_flow",
+            "index": "P27"
+        },
+        "activacion_P1": {
+            "type": "TimeWindowBinaryParameter",
+            "windows": [
+                0,
+                36,
+                72,
+                108,
+                144,
+                180,
+                216,
+                252,
+                288,
+                312
+            ],
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "is_variable": true
+        },
+        "activacion_P2": {
+            "type": "TimeWindowBinaryParameter",
+            "windows": [
+                0,
+                36,
+                72,
+                108,
+                144,
+                180,
+                216,
+                252,
+                288,
+                312
+            ],
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "dependencies": {
+                "activacion_P2": "activacion_P1"
+            },
+            "is_variable": true
+        },
+        "activacion_P3": {
+            "type": "TimeWindowBinaryParameter",
+            "windows": [
+                0,
+                36,
+                72,
+                108,
+                144,
+                180,
+                216,
+                252,
+                288,
+                312
+            ],
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "dependencies": {
+                "activacion_P3": "activacion_P2"
+            },
+            "is_variable": true
+        },
+        "activacion_P4": {
+            "type": "TimeWindowBinaryParameter",
+            "windows": [
+                0,
+                36,
+                72,
+                108,
+                144,
+                180,
+                216,
+                252,
+                288,
+                312
+            ],
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "is_variable": true
+        },
+        "activacion_P5": {
+            "type": "TimeWindowBinaryParameter",
+            "windows": [
+                0,
+                36,
+                72,
+                108,
+                144,
+                180,
+                216,
+                252,
+                288,
+                312
+            ],
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "is_variable": true
+        },
+        "activacion_P6": {
+            "type": "TimeWindowBinaryParameter",
+            "windows": [
+                0,
+                36,
+                72,
+                108,
+                144,
+                180,
+                216,
+                252,
+                288,
+                312
+            ],
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "is_variable": true
+        },
+        "activacion_P7": {
+            "type": "TimeWindowBinaryParameter",
+            "windows": [
+                0,
+                36,
+                72,
+                108,
+                144,
+                180,
+                216,
+                252,
+                288,
+                312
+            ],
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "dependencies": {
+                "activacion_P7": "activacion_P6"
+            },
+            "is_variable": true
+        },
+        "activacion_P8": {
+            "type": "TimeWindowBinaryParameter",
+            "windows": [
+                0,
+                36,
+                72,
+                108,
+                144,
+                180,
+                216,
+                252,
+                288,
+                312
+            ],
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "dependencies": {
+                "activacion_P8": "activacion_P7"
+            },
+            "is_variable": true
+        },
+        "activacion_P9": {
+            "type": "TimeWindowBinaryParameter",
+            "windows": [
+                0,
+                36,
+                72,
+                108,
+                144,
+                180,
+                216,
+                252,
+                288,
+                312
+            ],
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "dependencies": {
+                "activacion_P9": "activacion_P8"
+            },
+            "is_variable": true
+        },
+        "activacion_P10": {
+            "type": "TimeWindowBinaryParameter",
+            "windows": [
+                0,
+                36,
+                72,
+                108,
+                144,
+                180,
+                216,
+                252,
+                288,
+                312
+            ],
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "dependencies": {
+                "activacion_P10": "activacion_P9"
+            },
+            "is_variable": true
+        },
+        "activacion_P11": {
+            "type": "TimeWindowBinaryParameter",
+            "windows": [
+                0,
+                36,
+                72,
+                108,
+                144,
+                180,
+                216,
+                252,
+                288,
+                312
+            ],
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "dependencies": {
+                "activacion_P11": "activacion_P10"
+            },
+            "is_variable": true
+        },
+        "activacion_P12": {
+            "type": "TimeWindowBinaryParameter",
+            "windows": [
+                0,
+                36,
+                72,
+                108,
+                144,
+                180,
+                216,
+                252,
+                288,
+                312
+            ],
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "dependencies": {
+                "activacion_P12": "activacion_P11"
+            },
+            "is_variable": true
+        },
+        "activacion_P13": {
+            "type": "TimeWindowBinaryParameter",
+            "windows": [
+                0,
+                36,
+                72,
+                108,
+                144,
+                180,
+                216,
+                252,
+                288,
+                312
+            ],
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "is_variable": true
+        },
+        "activacion_P14": {
+            "type": "TimeWindowBinaryParameter",
+            "windows": [
+                0,
+                36,
+                72,
+                108,
+                144,
+                180,
+                216,
+                252,
+                288,
+                312
+            ],
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "is_variable": true
+        },
+        "activacion_P15": {
+            "type": "TimeWindowBinaryParameter",
+            "windows": [
+                0,
+                36,
+                72,
+                108,
+                144,
+                180,
+                216,
+                252,
+                288,
+                312
+            ],
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "is_variable": true
+        },
+        "activacion_P16": {
+            "type": "TimeWindowBinaryParameter",
+            "windows": [
+                0,
+                36,
+                72,
+                108,
+                144,
+                180,
+                216,
+                252,
+                288,
+                312
+            ],
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "is_variable": true
+        },
+        "activacion_P17": {
+            "type": "TimeWindowBinaryParameter",
+            "windows": [
+                0,
+                36,
+                72,
+                108,
+                144,
+                180,
+                216,
+                252,
+                288,
+                312
+            ],
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "is_variable": true
+        },
+        "activacion_P18": {
+            "type": "TimeWindowBinaryParameter",
+            "windows": [
+                0,
+                36,
+                72,
+                108,
+                144,
+                180,
+                216,
+                252,
+                288,
+                312
+            ],
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "is_variable": true
+        },
+        "activacion_P19": {
+            "type": "TimeWindowBinaryParameter",
+            "windows": [
+                0,
+                36,
+                72,
+                108,
+                144,
+                180,
+                216,
+                252,
+                288,
+                312
+            ],
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "is_variable": true
+        },
+        "activacion_P20": {
+            "type": "TimeWindowBinaryParameter",
+            "windows": [
+                0,
+                36,
+                72,
+                108,
+                144,
+                180,
+                216,
+                252,
+                288,
+                312
+            ],
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "is_variable": true
+        },
+        "activacion_P21": {
+            "type": "TimeWindowBinaryParameter",
+            "windows": [
+                0,
+                36,
+                72,
+                108,
+                144,
+                180,
+                216,
+                252,
+                288,
+                312
+            ],
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "is_variable": true
+        },
+        "activacion_P22": {
+            "type": "TimeWindowBinaryParameter",
+            "windows": [
+                0,
+                36,
+                72,
+                108,
+                144,
+                180,
+                216,
+                252,
+                288,
+                312
+            ],
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "is_variable": true
+        },
+        "activacion_P23": {
+            "type": "TimeWindowBinaryParameter",
+            "windows": [
+                0,
+                36,
+                72,
+                108,
+                144,
+                180,
+                216,
+                252,
+                288,
+                312
+            ],
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "is_variable": true
+        },
+        "activacion_P24": {
+            "type": "TimeWindowBinaryParameter",
+            "windows": [
+                0,
+                36,
+                72,
+                108,
+                144,
+                180,
+                216,
+                252,
+                288,
+                312
+            ],
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "is_variable": true
+        },
+        "activacion_P25": {
+            "type": "TimeWindowBinaryParameter",
+            "windows": [
+                0,
+                36,
+                72,
+                108,
+                144,
+                180,
+                216,
+                252,
+                288,
+                312
+            ],
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "is_variable": true
+        },
+        "activacion_P26": {
+            "type": "TimeWindowBinaryParameter",
+            "windows": [
+                0,
+                36,
+                72,
+                108,
+                144,
+                180,
+                216,
+                252,
+                288,
+                312
+            ],
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "is_variable": true
+        },
+        "activacion_P27": {
+            "type": "TimeWindowBinaryParameter",
+            "windows": [
+                0,
+                36,
+                72,
+                108,
+                144,
+                180,
+                216,
+                252,
+                288,
+                312
+            ],
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "is_variable": true
+        },
+        "oferta_activada_P1": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P1",
+                "activacion_P1"
+            ]
+        },
+        "oferta_activada_P2": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P2",
+                "activacion_P2"
+            ]
+        },
+        "oferta_activada_P3": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P3",
+                "activacion_P3"
+            ]
+        },
+        "oferta_activada_P4": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P4",
+                "activacion_P4"
+            ]
+        },
+        "oferta_activada_P5": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P5",
+                "activacion_P5"
+            ]
+        },
+        "oferta_activada_P6": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P6",
+                "activacion_P6"
+            ]
+        },
+        "oferta_activada_P7": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P7",
+                "activacion_P7"
+            ]
+        },
+        "oferta_activada_P8": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P8",
+                "activacion_P8"
+            ]
+        },
+        "oferta_activada_P9": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P9",
+                "activacion_P9"
+            ]
+        },
+        "oferta_activada_P10": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P10",
+                "activacion_P10"
+            ]
+        },
+        "oferta_activada_P11": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P11",
+                "activacion_P11"
+            ]
+        },
+        "oferta_activada_P12": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P12",
+                "activacion_P12"
+            ]
+        },
+        "oferta_activada_P13": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P13",
+                "activacion_P13"
+            ]
+        },
+        "oferta_activada_P14": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P14",
+                "activacion_P14"
+            ]
+        },
+        "oferta_activada_P15": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P15",
+                "activacion_P15"
+            ]
+        },
+        "oferta_activada_P16": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P16",
+                "activacion_P16"
+            ]
+        },
+        "oferta_activada_P17": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P17",
+                "activacion_P17"
+            ]
+        },
+        "oferta_activada_P18": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P18",
+                "activacion_P18"
+            ]
+        },
+        "oferta_activada_P19": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P19",
+                "activacion_P19"
+            ]
+        },
+        "oferta_activada_P20": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P20",
+                "activacion_P20"
+            ]
+        },
+        "oferta_activada_P21": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P21",
+                "activacion_P21"
+            ]
+        },
+        "oferta_activada_P22": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P22",
+                "activacion_P22"
+            ]
+        },
+        "oferta_activada_P23": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P23",
+                "activacion_P23"
+            ]
+        },
+        "oferta_activada_P24": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P24",
+                "activacion_P24"
+            ]
+        },
+        "oferta_activada_P25": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P25",
+                "activacion_P25"
+            ]
+        },
+        "oferta_activada_P26": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P26",
+                "activacion_P26"
+            ]
+        },
+        "oferta_activada_P27": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P27",
+                "activacion_P27"
+            ]
+        },
+        "oferta_sostenible_agua_reuso": {
+            "type": "aggregated",
+            "agg_func": "sum",
+            "parameters": [
+                "oferta_activada_P6",
+                "oferta_activada_P7",
+                "oferta_activada_P8",
+                "oferta_activada_P9",
+                "oferta_activada_P10",
+                "oferta_activada_P11",
+                "oferta_activada_P12"
+            ]
+        },
+        "oferta_sostenible_total": {
+            "type": "aggregated",
+            "agg_func": "sum",
+            "parameters": [
+                "oferta_sostenible_BAU",
+                "agua_residual_a_reuso_abs",
+                "oferta_activada_P1",
+                "oferta_activada_P2",
+                "oferta_activada_P3",
+                "oferta_activada_P4",
+                "oferta_activada_P5",
+                "oferta_activada_P6",
+                "oferta_activada_P7",
+                "oferta_activada_P8",
+                "oferta_activada_P9",
+                "oferta_activada_P10",
+                "oferta_activada_P11",
+                "oferta_activada_P12",
+                "oferta_activada_P13",
+                "oferta_activada_P14",
+                "oferta_activada_P15",
+                "oferta_activada_P16",
+                "oferta_activada_P17",
+                "oferta_activada_P18",
+                "oferta_activada_P19",
+                "oferta_activada_P20",
+                "oferta_activada_P21",
+                "oferta_activada_P22",
+                "oferta_activada_P23",
+                "oferta_activada_P24",
+                "oferta_activada_P25",
+                "oferta_activada_P26",
+                "oferta_activada_P27"
+            ]
+        },
+        "margen_de_reserva": {
+            "type": "aggregated",
+            "agg_func": "sum",
+            "parameters": [
+                "oferta_sostenible_total",
+                "flujo_demanda_total_negativo"
+            ]
+        },
+        "costo_capital_P1": {
+            "type": "constant",
+            "table": "projects",
+            "column": "capital_cost",
+            "index": "P1"
+        },
+        "costo_capital_P2": {
+            "type": "constant",
+            "table": "projects",
+            "column": "capital_cost",
+            "index": "P2"
+        },
+        "costo_capital_P3": {
+            "type": "constant",
+            "table": "projects",
+            "column": "capital_cost",
+            "index": "P3"
+        },
+        "costo_capital_P4": {
+            "type": "constant",
+            "table": "projects",
+            "column": "capital_cost",
+            "index": "P4"
+        },
+        "costo_capital_P5": {
+            "type": "constant",
+            "table": "projects",
+            "column": "capital_cost",
+            "index": "P5"
+        },
+        "costo_capital_P6": {
+            "type": "constant",
+            "table": "projects",
+            "column": "capital_cost",
+            "index": "P6"
+        },
+        "costo_capital_P7": {
+            "type": "constant",
+            "table": "projects",
+            "column": "capital_cost",
+            "index": "P7"
+        },
+        "costo_capital_P8": {
+            "type": "constant",
+            "table": "projects",
+            "column": "capital_cost",
+            "index": "P8"
+        },
+        "costo_capital_P9": {
+            "type": "constant",
+            "table": "projects",
+            "column": "capital_cost",
+            "index": "P9"
+        },
+        "costo_capital_P10": {
+            "type": "constant",
+            "table": "projects",
+            "column": "capital_cost",
+            "index": "P10"
+        },
+        "costo_capital_P11": {
+            "type": "constant",
+            "table": "projects",
+            "column": "capital_cost",
+            "index": "P11"
+        },
+        "costo_capital_P12": {
+            "type": "constant",
+            "table": "projects",
+            "column": "capital_cost",
+            "index": "P12"
+        },
+        "costo_capital_P13": {
+            "type": "constant",
+            "table": "projects",
+            "column": "capital_cost",
+            "index": "P13"
+        },
+        "costo_capital_P14": {
+            "type": "constant",
+            "table": "projects",
+            "column": "capital_cost",
+            "index": "P14"
+        },
+        "costo_capital_P15": {
+            "type": "constant",
+            "table": "projects",
+            "column": "capital_cost",
+            "index": "P15"
+        },
+        "costo_capital_P16": {
+            "type": "constant",
+            "table": "projects",
+            "column": "capital_cost",
+            "index": "P16"
+        },
+        "costo_capital_P17": {
+            "type": "constant",
+            "table": "projects",
+            "column": "capital_cost",
+            "index": "P17"
+        },
+        "costo_capital_P18": {
+            "type": "constant",
+            "table": "projects",
+            "column": "capital_cost",
+            "index": "P18"
+        },
+        "costo_capital_P19": {
+            "type": "constant",
+            "table": "projects",
+            "column": "capital_cost",
+            "index": "P19"
+        },
+        "costo_capital_P20": {
+            "type": "constant",
+            "table": "projects",
+            "column": "capital_cost",
+            "index": "P20"
+        },
+        "costo_capital_P21": {
+            "type": "constant",
+            "table": "projects",
+            "column": "capital_cost",
+            "index": "P21"
+        },
+        "costo_capital_P22": {
+            "type": "constant",
+            "table": "projects",
+            "column": "capital_cost",
+            "index": "P22"
+        },
+        "costo_capital_P23": {
+            "type": "constant",
+            "table": "projects",
+            "column": "capital_cost",
+            "index": "P23"
+        },
+        "costo_capital_P24": {
+            "type": "constant",
+            "table": "projects",
+            "column": "capital_cost",
+            "index": "P24"
+        },
+        "costo_capital_P25": {
+            "type": "constant",
+            "table": "projects",
+            "column": "capital_cost",
+            "index": "P25"
+        },
+        "costo_capital_P26": {
+            "type": "constant",
+            "table": "projects",
+            "column": "capital_cost",
+            "index": "P26"
+        },
+        "costo_capital_P27": {
+            "type": "constant",
+            "table": "projects",
+            "column": "capital_cost",
+            "index": "P27"
+        },
+        "costo_capital_activado_P1": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costo_capital_P1",
+                "activacion_P1"
+            ]
+        },
+        "costo_capital_activado_P2": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costo_capital_P2",
+                "activacion_P2"
+            ]
+        },
+        "costo_capital_activado_P3": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costo_capital_P3",
+                "activacion_P3"
+            ]
+        },
+        "costo_capital_activado_P4": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costo_capital_P4",
+                "activacion_P4"
+            ]
+        },
+        "costo_capital_activado_P5": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costo_capital_P5",
+                "activacion_P5"
+            ]
+        },
+        "costo_capital_activado_P6": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costo_capital_P6",
+                "activacion_P6"
+            ]
+        },
+        "costo_capital_activado_P7": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costo_capital_P7",
+                "activacion_P7"
+            ]
+        },
+        "costo_capital_activado_P8": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costo_capital_P8",
+                "activacion_P8"
+            ]
+        },
+        "costo_capital_activado_P9": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costo_capital_P9",
+                "activacion_P9"
+            ]
+        },
+        "costo_capital_activado_P10": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costo_capital_P10",
+                "activacion_P10"
+            ]
+        },
+        "costo_capital_activado_P11": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costo_capital_P11",
+                "activacion_P11"
+            ]
+        },
+        "costo_capital_activado_P12": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costo_capital_P12",
+                "activacion_P12"
+            ]
+        },
+        "costo_capital_activado_P13": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costo_capital_P13",
+                "activacion_P13"
+            ]
+        },
+        "costo_capital_activado_P14": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costo_capital_P14",
+                "activacion_P14"
+            ]
+        },
+        "costo_capital_activado_P15": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costo_capital_P15",
+                "activacion_P15"
+            ]
+        },
+        "costo_capital_activado_P16": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costo_capital_P16",
+                "activacion_P16"
+            ]
+        },
+        "costo_capital_activado_P17": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costo_capital_P17",
+                "activacion_P17"
+            ]
+        },
+        "costo_capital_activado_P18": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costo_capital_P18",
+                "activacion_P18"
+            ]
+        },
+        "costo_capital_activado_P19": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costo_capital_P19",
+                "activacion_P19"
+            ]
+        },
+        "costo_capital_activado_P20": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costo_capital_P20",
+                "activacion_P20"
+            ]
+        },
+        "costo_capital_activado_P21": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costo_capital_P21",
+                "activacion_P21"
+            ]
+        },
+        "costo_capital_activado_P22": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costo_capital_P22",
+                "activacion_P22"
+            ]
+        },
+        "costo_capital_activado_P23": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costo_capital_P23",
+                "activacion_P23"
+            ]
+        },
+        "costo_capital_activado_P24": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costo_capital_P24",
+                "activacion_P24"
+            ]
+        },
+        "costo_capital_activado_P25": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costo_capital_P25",
+                "activacion_P25"
+            ]
+        },
+        "costo_capital_activado_P26": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costo_capital_P26",
+                "activacion_P26"
+            ]
+        },
+        "costo_capital_activado_P27": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costo_capital_P27",
+                "activacion_P27"
+            ]
+        },
+        "costos_om_P1": {
+            "type": "constant",
+            "table": "projects",
+            "column": "om_costs",
+            "index": "P1"
+        },
+        "costos_om_P2": {
+            "type": "constant",
+            "table": "projects",
+            "column": "om_costs",
+            "index": "P2"
+        },
+        "costos_om_P3": {
+            "type": "constant",
+            "table": "projects",
+            "column": "om_costs",
+            "index": "P3"
+        },
+        "costos_om_P4": {
+            "type": "constant",
+            "table": "projects",
+            "column": "om_costs",
+            "index": "P4"
+        },
+        "costos_om_P5": {
+            "type": "constant",
+            "table": "projects",
+            "column": "om_costs",
+            "index": "P5"
+        },
+        "costos_om_P6": {
+            "type": "constant",
+            "table": "projects",
+            "column": "om_costs",
+            "index": "P6"
+        },
+        "costos_om_P7": {
+            "type": "constant",
+            "table": "projects",
+            "column": "om_costs",
+            "index": "P7"
+        },
+        "costos_om_P8": {
+            "type": "constant",
+            "table": "projects",
+            "column": "om_costs",
+            "index": "P8"
+        },
+        "costos_om_P9": {
+            "type": "constant",
+            "table": "projects",
+            "column": "om_costs",
+            "index": "P9"
+        },
+        "costos_om_P10": {
+            "type": "constant",
+            "table": "projects",
+            "column": "om_costs",
+            "index": "P10"
+        },
+        "costos_om_P11": {
+            "type": "constant",
+            "table": "projects",
+            "column": "om_costs",
+            "index": "P11"
+        },
+        "costos_om_P12": {
+            "type": "constant",
+            "table": "projects",
+            "column": "om_costs",
+            "index": "P12"
+        },
+        "costos_om_P13": {
+            "type": "constant",
+            "table": "projects",
+            "column": "om_costs",
+            "index": "P13"
+        },
+        "costos_om_P14": {
+            "type": "constant",
+            "table": "projects",
+            "column": "om_costs",
+            "index": "P14"
+        },
+        "costos_om_P15": {
+            "type": "constant",
+            "table": "projects",
+            "column": "om_costs",
+            "index": "P15"
+        },
+        "costos_om_P16": {
+            "type": "constant",
+            "table": "projects",
+            "column": "om_costs",
+            "index": "P16"
+        },
+        "costos_om_P17": {
+            "type": "constant",
+            "table": "projects",
+            "column": "om_costs",
+            "index": "P17"
+        },
+        "costos_om_P18": {
+            "type": "constant",
+            "table": "projects",
+            "column": "om_costs",
+            "index": "P18"
+        },
+        "costos_om_P19": {
+            "type": "constant",
+            "table": "projects",
+            "column": "om_costs",
+            "index": "P19"
+        },
+        "costos_om_P20": {
+            "type": "constant",
+            "table": "projects",
+            "column": "om_costs",
+            "index": "P20"
+        },
+        "costos_om_P21": {
+            "type": "constant",
+            "table": "projects",
+            "column": "om_costs",
+            "index": "P21"
+        },
+        "costos_om_P22": {
+            "type": "constant",
+            "table": "projects",
+            "column": "om_costs",
+            "index": "P22"
+        },
+        "costos_om_P23": {
+            "type": "constant",
+            "table": "projects",
+            "column": "om_costs",
+            "index": "P23"
+        },
+        "costos_om_P24": {
+            "type": "constant",
+            "table": "projects",
+            "column": "om_costs",
+            "index": "P24"
+        },
+        "costos_om_P25": {
+            "type": "constant",
+            "table": "projects",
+            "column": "om_costs",
+            "index": "P25"
+        },
+        "costos_om_P26": {
+            "type": "constant",
+            "table": "projects",
+            "column": "om_costs",
+            "index": "P26"
+        },
+        "costos_om_P27": {
+            "type": "constant",
+            "table": "projects",
+            "column": "om_costs",
+            "index": "P27"
+        },
+        "costos_om_activados_P1": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costos_om_P1",
+                "activacion_P1"
+            ]
+        },
+        "costos_om_activados_P2": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costos_om_P2",
+                "activacion_P2"
+            ]
+        },
+        "costos_om_activados_P3": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costos_om_P3",
+                "activacion_P3"
+            ]
+        },
+        "costos_om_activados_P4": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costos_om_P4",
+                "activacion_P4"
+            ]
+        },
+        "costos_om_activados_P5": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costos_om_P5",
+                "activacion_P5"
+            ]
+        },
+        "costos_om_activados_P6": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costos_om_P6",
+                "activacion_P6"
+            ]
+        },
+        "costos_om_activados_P7": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costos_om_P7",
+                "activacion_P7"
+            ]
+        },
+        "costos_om_activados_P8": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costos_om_P8",
+                "activacion_P8"
+            ]
+        },
+        "costos_om_activados_P9": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costos_om_P9",
+                "activacion_P9"
+            ]
+        },
+        "costos_om_activados_P10": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costos_om_P10",
+                "activacion_P10"
+            ]
+        },
+        "costos_om_activados_P11": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costos_om_P11",
+                "activacion_P11"
+            ]
+        },
+        "costos_om_activados_P12": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costos_om_P12",
+                "activacion_P12"
+            ]
+        },
+        "costos_om_activados_P13": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costos_om_P13",
+                "activacion_P13"
+            ]
+        },
+        "costos_om_activados_P14": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costos_om_P14",
+                "activacion_P14"
+            ]
+        },
+        "costos_om_activados_P15": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costos_om_P15",
+                "activacion_P15"
+            ]
+        },
+        "costos_om_activados_P16": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costos_om_P16",
+                "activacion_P16"
+            ]
+        },
+        "costos_om_activados_P17": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costos_om_P17",
+                "activacion_P17"
+            ]
+        },
+        "costos_om_activados_P18": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costos_om_P18",
+                "activacion_P18"
+            ]
+        },
+        "costos_om_activados_P19": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costos_om_P19",
+                "activacion_P19"
+            ]
+        },
+        "costos_om_activados_P20": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costos_om_P20",
+                "activacion_P20"
+            ]
+        },
+        "costos_om_activados_P21": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costos_om_P21",
+                "activacion_P21"
+            ]
+        },
+        "costos_om_activados_P22": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costos_om_P22",
+                "activacion_P22"
+            ]
+        },
+        "costos_om_activados_P23": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costos_om_P23",
+                "activacion_P23"
+            ]
+        },
+        "costos_om_activados_P24": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costos_om_P24",
+                "activacion_P24"
+            ]
+        },
+        "costos_om_activados_P25": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costos_om_P25",
+                "activacion_P25"
+            ]
+        },
+        "costos_om_activados_P26": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costos_om_P26",
+                "activacion_P26"
+            ]
+        },
+        "costos_om_activados_P27": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "costos_om_P27",
+                "activacion_P27"
+            ]
+        },
+        "costos_totales": {
+            "type": "aggregated",
+            "agg_func": "sum",
+            "parameters": [
+                "costo_capital_activado_P1",
+                "costos_om_activados_P1",
+                "costo_capital_activado_P2",
+                "costos_om_activados_P2",
+                "costo_capital_activado_P3",
+                "costos_om_activados_P3",
+                "costo_capital_activado_P4",
+                "costos_om_activados_P4",
+                "costo_capital_activado_P5",
+                "costos_om_activados_P5",
+                "costo_capital_activado_P6",
+                "costos_om_activados_P6",
+                "costo_capital_activado_P7",
+                "costos_om_activados_P7",
+                "costo_capital_activado_P8",
+                "costos_om_activados_P8",
+                "costo_capital_activado_P9",
+                "costos_om_activados_P9",
+                "costo_capital_activado_P10",
+                "costos_om_activados_P10",
+                "costo_capital_activado_P11",
+                "costos_om_activados_P11",
+                "costo_capital_activado_P12",
+                "costos_om_activados_P12",
+                "costo_capital_activado_P13",
+                "costos_om_activados_P13",
+                "costo_capital_activado_P14",
+                "costos_om_activados_P14",
+                "costo_capital_activado_P15",
+                "costos_om_activados_P15",
+                "costo_capital_activado_P16",
+                "costos_om_activados_P16",
+                "costo_capital_activado_P17",
+                "costos_om_activados_P17",
+                "costo_capital_activado_P18",
+                "costos_om_activados_P18",
+                "costo_capital_activado_P19",
+                "costos_om_activados_P19",
+                "costo_capital_activado_P20",
+                "costos_om_activados_P20",
+                "costo_capital_activado_P21",
+                "costos_om_activados_P21",
+                "costo_capital_activado_P22",
+                "costos_om_activados_P22",
+                "costo_capital_activado_P23",
+                "costos_om_activados_P23",
+                "costo_capital_activado_P24",
+                "costos_om_activados_P24",
+                "costo_capital_activado_P25",
+                "costos_om_activados_P25",
+                "costo_capital_activado_P26",
+                "costos_om_activados_P26",
+                "costo_capital_activado_P27",
+                "costos_om_activados_P27"
+            ]
+        }
+    },
+    "tables": {
+        "supply": {
+            "url": "supply_corrected.csv",
+            "index_col": "Date",
+            "parse_dates": true
+        },
+        "demand": {
+            "url": "demand_corrected.csv",
+            "index_col": "Date",
+            "parse_dates": true
+        },
+        "nrw": {
+            "url": "anc_corrected.csv",
+            "index_col": "Date",
+            "parse_dates": true
+        },
+        "projects": {
+            "url": "projects_final_v4.csv",
+            "index_col": "project_ID",
+            "sep": ";"
+        }
+    },
+    "recorders": {
+        "nodo_oferta_BAU": {
+            "type": "numpyarraynoderecorder",
+            "node": "oferta_BAU"
+        },
+        "nodo_oferta_P1": {
+            "type": "numpyarraynoderecorder",
+            "node": "oferta_P1_delayed"
+        },
+        "nodo_oferta_P2": {
+            "type": "numpyarraynoderecorder",
+            "node": "oferta_P2_delayed"
+        },
+        "nodo_oferta_P3": {
+            "type": "numpyarraynoderecorder",
+            "node": "oferta_P3_delayed"
+        },
+        "nodo_oferta_P4": {
+            "type": "numpyarraynoderecorder",
+            "node": "oferta_P4_delayed"
+        },
+        "nodo_oferta_P5": {
+            "type": "numpyarraynoderecorder",
+            "node": "oferta_P5_delayed"
+        },
+        "nodo_oferta_P6": {
+            "type": "numpyarraynoderecorder",
+            "node": "oferta_P6_delayed"
+        },
+        "nodo_oferta_P7": {
+            "type": "numpyarraynoderecorder",
+            "node": "oferta_P7_delayed"
+        },
+        "nodo_oferta_P8": {
+            "type": "numpyarraynoderecorder",
+            "node": "oferta_P8_delayed"
+        },
+        "nodo_oferta_P9": {
+            "type": "numpyarraynoderecorder",
+            "node": "oferta_P9_delayed"
+        },
+        "nodo_oferta_P10": {
+            "type": "numpyarraynoderecorder",
+            "node": "oferta_P10_delayed"
+        },
+        "nodo_oferta_P11": {
+            "type": "numpyarraynoderecorder",
+            "node": "oferta_P11_delayed"
+        },
+        "nodo_oferta_P12": {
+            "type": "numpyarraynoderecorder",
+            "node": "oferta_P12_delayed"
+        },
+        "nodo_oferta_P13": {
+            "type": "numpyarraynoderecorder",
+            "node": "oferta_P13_delayed"
+        },
+        "nodo_oferta_P14": {
+            "type": "numpyarraynoderecorder",
+            "node": "oferta_P14_delayed"
+        },
+        "nodo_oferta_P15": {
+            "type": "numpyarraynoderecorder",
+            "node": "oferta_P15_delayed"
+        },
+        "nodo_oferta_P16": {
+            "type": "numpyarraynoderecorder",
+            "node": "oferta_P16_delayed"
+        },
+        "nodo_oferta_P17": {
+            "type": "numpyarraynoderecorder",
+            "node": "oferta_P17_delayed"
+        },
+        "nodo_oferta_P18": {
+            "type": "numpyarraynoderecorder",
+            "node": "oferta_P18_delayed"
+        },
+        "nodo_oferta_P19": {
+            "type": "numpyarraynoderecorder",
+            "node": "oferta_P19_delayed"
+        },
+        "nodo_oferta_P20": {
+            "type": "numpyarraynoderecorder",
+            "node": "oferta_P20_delayed"
+        },
+        "nodo_oferta_P21": {
+            "type": "numpyarraynoderecorder",
+            "node": "oferta_P21_delayed"
+        },
+        "nodo_oferta_P22": {
+            "type": "numpyarraynoderecorder",
+            "node": "oferta_P22_delayed"
+        },
+        "nodo_oferta_P23": {
+            "type": "numpyarraynoderecorder",
+            "node": "oferta_P23_delayed"
+        },
+        "nodo_oferta_P24": {
+            "type": "numpyarraynoderecorder",
+            "node": "oferta_P24_delayed"
+        },
+        "nodo_oferta_P25": {
+            "type": "numpyarraynoderecorder",
+            "node": "oferta_P25_delayed"
+        },
+        "nodo_oferta_P26": {
+            "type": "numpyarraynoderecorder",
+            "node": "oferta_P26_delayed"
+        },
+        "nodo_oferta_P27": {
+            "type": "numpyarraynoderecorder",
+            "node": "oferta_P27_delayed"
+        },
+        "nodo_transferencia": {
+            "type": "numpyarraynoderecorder",
+            "node": "transferencia"
+        },
+        "nodo_demanda": {
+            "type": "numpyarraynoderecorder",
+            "node": "demanda"
+        },
+        "nodo_anc": {
+            "type": "numpyarraynoderecorder",
+            "node": "anc"
+        },
+        "nodo_dummy": {
+            "type": "numpyarraynoderecorder",
+            "node": "dummy"
+        },
+        "deficit_frequency": {
+            "type": "DeficitFrequencyNode",
+            "node": "demanda"
+        },
+        "deficit_total": {
+            "type": "TotalDeficitNodeRecorder",
+            "node": "demanda"
+        },
+        "par_deficit_demand": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "deficit_demand"
+        },
+        "par_deficit_anc": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "deficit_anc"
+        },
+        "par_activacion_P1": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_P1"
+        },
+        "par_activacion_P2": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_P2"
+        },
+        "par_activacion_P3": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_P3"
+        },
+        "par_activacion_P4": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_P4"
+        },
+        "par_activacion_P5": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_P5"
+        },
+        "par_activacion_P6": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_P6"
+        },
+        "par_activacion_P7": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_P7"
+        },
+        "par_activacion_P8": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_P8"
+        },
+        "par_activacion_P9": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_P9"
+        },
+        "par_activacion_P10": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_P10"
+        },
+        "par_activacion_P11": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_P11"
+        },
+        "par_activacion_P12": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_P12"
+        },
+        "par_activacion_P13": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_P13"
+        },
+        "par_activacion_P14": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_P14"
+        },
+        "par_activacion_P15": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_P15"
+        },
+        "par_activacion_P16": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_P16"
+        },
+        "par_activacion_P17": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_P17"
+        },
+        "par_activacion_P18": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_P18"
+        },
+        "par_activacion_P19": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_P19"
+        },
+        "par_activacion_P20": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_P20"
+        },
+        "par_activacion_P21": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_P21"
+        },
+        "par_activacion_P22": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_P22"
+        },
+        "par_activacion_P23": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_P23"
+        },
+        "par_activacion_P24": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_P24"
+        },
+        "par_activacion_P25": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_P25"
+        },
+        "par_activacion_P26": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_P26"
+        },
+        "par_activacion_P27": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_P27"
+        },
+        "par_margen_de_reserva": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "margen_de_reserva"
+        },
+        "par_margen_de_reserva_rest": {
+            "type": "MinParameterRecorder",
+            "parameter": "margen_de_reserva",
+            "constraint_lower_bounds": 1.5
+        },
+        "par_oferta_sostenible_agua_reuso": {
+            "type": "MaxParameterRecorder",
+            "parameter": "oferta_sostenible_agua_reuso"
+        },
+        "par_costos_totales": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "costos_totales"
+        },
+        "par_costos_totales_FO": {
+            "type": "MeanParameterRecorder",
+            "parameter": "costos_totales",
+            "is_objective": "minimise"
+        }
+    }
+}

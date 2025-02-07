@@ -1,0 +1,28 @@
+﻿project_ID;project_name;expected_flow;estimated_time_of_completion;capital_cost;om_costs
+P1;Reducción de ANC;0.5;60;500000000;0
+P2;Reducción de ANC;0.5;60;600000000;0
+P3;Reducción de ANC;0.5;60;750000000;0
+P4;Inyección de agua tratada al acuífero Buenos Aires;0.8;84;3402942220;209335856.4
+P5;Agua de procesos y contacto;1.75;24;2000000000;189000000
+P6;Uso indirecto de agua residual tratada (Dulces Nombres - La Boca);0.9;48;2797865057;80628478.34
+P7;Uso indirecto de agua residual tratada (Dulces Nombres - La Boca);0.9;48;2797865057;80628478.34
+P8;Uso indirecto de agua residual tratada (Dulces Nombres - La Boca);0.9;48;2797865057;80628478.34
+P9;Uso indirecto de agua residual tratada (Dulces Nombres - La Boca);0.9;48;2797865057;80628478.34
+P10;Uso indirecto de agua residual tratada (Dulces Nombres - La Boca);0.9;48;2797865057;80628478.34
+P11;Uso indirecto de agua residual tratada (Dulces Nombres - La Boca);0.9;48;2797865057;80628478.34
+P12;Uso indirecto de agua residual tratada (Dulces Nombres - La Boca);2.7;72;10193595171;251807855.1
+P13;Recuperación de excedentes (Residuos) de riego ;3.375;60;30823346206;2027402894
+P14;Presa Terreros ;3;120;8986330375;590969736.6
+P15;Rio Salinillas - Icamole;1.68;72;10919160561;585944113.6
+P16;Acueducto Presa Venustiano Carranza - Salinillas - Monterrey;2;192;31053846154;2042616959
+P17;Panuco regional;2;84;26027440000;3423993929
+P18;Desalinizadora - El Cuchillo;4.5;84;51999608520;2217770620
+P19;Acueducto Vicente Guerrero - Cerro Prieto;1.05;120;21878846154;1439116494
+P20;Acueducto Presa Las Blancas - AMM;3.6;84;20608461538;1355554891
+P21;Panuco - Cerro Prieto;2.8;72;67122046943;4415061205
+P22;Campo de pozos El Pajonal;0.5;48;920607213.7;60469188.17
+P23;Pozos en el AMM ;0.225;120;115960242.8;7133426.068
+P24;Tunel San Francisco II;0.32;12;500000000;32888308.73
+P25;Subalveo de Río Conchos;0.075;48;123968384.4;7828904.324
+P26;Pozos Sierra Gomas;0.04;36;332562503.1;21556571.53
+P27;Pozos Congregación Calles;0.0375;48;371316184.2;6487320.889

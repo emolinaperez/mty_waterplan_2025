@@ -17,7 +17,8 @@ import json
 import pandas as pd
 import numpy as np
 import platypus
-from platypus.core import _EvaluateJob, Algorithm, PlatypusConfig, Solution, Variator
+from platypus.core import _EvaluateJob, Algorithm, Solution, Variator
+from platypus.config import PlatypusConfig
 import platypus.evaluator
 from platypus.evaluator import Job, ProcessPoolEvaluator, MultiprocessingEvaluator, MapEvaluator
 from platypus.types import Binary

@@ -1,0 +1,46 @@
+# Directory-based project files
+.vscode/
+
+# OS generated files and folders
+.DS_Store
+Thumbs.db
+
+# Python
+*.py[cod]
+__pycache__/
+*.cover
+*.py,cover
+*.pyc
+*.pyo
+*.pyd
+*.pvm
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Virtual environments
+venv/
+ENV/
+env/
+env.bak/
+*.env
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# macOS
+.DS_Store
+
+
+# Windows
+Thumbs.db
+ehthumbs.db
+
+# Compressed files
+*.gz
+*.zip
+*.7z
+*.rar
+*.tar

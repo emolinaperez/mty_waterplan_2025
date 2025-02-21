@@ -9,9 +9,15 @@ import os
 import json
 import pandas as pd
 import re
+import copy
 from utils.utils import Utils
 
-# Definir los escenarios de demanda y oferta
+# --- Precompile Regular Expressions ---
+col_clean_re = re.compile(r"^\('|',? 0\)$|'$")
+activation_pattern = re.compile(r'^par_activacion_p[0-9]+$', re.IGNORECASE)
+project_pattern = re.compile(r'P(\d+)')
+
+# --- Define Placeholders ---
 reemplazos_demanda = [
     "ANC02_CLIMIN_ECOACE", "ANC02_CLIMIN_ECODIN", "ANC02_CLIMIN_ECOHIS",
     "ANC02_CLIMRCP45_ECOACE", "ANC02_CLIMRCP45_ECODIN", "ANC02_CLIMRCP45_ECOHIS",
@@ -33,7 +39,7 @@ reemplazos_oferta = [
     "6C, 0.90", "6C, 0.95", "6C, 0.97", "7A, 0.90", "7A, 0.95", "7A, 0.97"
 ]
 
-# Definir paths
+# --- Define Paths ---
 SCRIPTS_DIR = os.path.dirname(os.path.realpath(__file__))
 PARENT_DIR = os.path.dirname(SCRIPTS_DIR)
 CONFIG_DIR = os.path.join(PARENT_DIR, 'config')
@@ -41,71 +47,95 @@ JSON_DIR = os.path.join(CONFIG_DIR, 'json')
 YAML_DIR = os.path.join(CONFIG_DIR, 'yaml')
 MODEL_RESULTS_DIR = os.path.join(PARENT_DIR, 'model_results')
 JSON_RDM_DIR = os.path.join(PARENT_DIR, 'json_RDM')
-
-# Make sure JSON_RDM_DIR exists
 os.makedirs(JSON_RDM_DIR, exist_ok=True)
 
-# Leer archivo YAML con la configuración de los archivos base
+# --- Load Config ---
 utils = Utils()
 archivo_base = utils.read_yaml_file(os.path.join(YAML_DIR, 'copias_generadas_script_config.yaml'))['archivo_base']
 
+# --- Recursive Replacement Function ---
+def recursive_replace(obj, replacements):
+    """
+    Recursively traverse the JSON-like object and replace occurrences of keys in the
+    'replacements' dictionary with their corresponding values.
+    """
+    if isinstance(obj, dict):
+        return {k: recursive_replace(v, replacements) for k, v in obj.items()}
+    elif isinstance(obj, list):
+        return [recursive_replace(item, replacements) for item in obj]
+    elif isinstance(obj, str):
+        for old, new in replacements.items():
+            obj = obj.replace(old, new)
+        return obj
+    else:
+        return obj
 
-# Inicializar contador para las carpetas de salida
+# --- Initialize Output Folder Counter ---
 output_folder_counter = 1
 
-# Loop over folders copias_generadas_1 to copias_generadas_27
+# --- Process Each Folder and CSV File ---
 for folder_num in range(1, 28):
     csv_folder_path = os.path.join(MODEL_RESULTS_DIR, f"copias_generadas_{folder_num}")
     csv_files = [f for f in os.listdir(csv_folder_path) if f.endswith('.csv')]
 
-    # Procesar cada archivo CSV
     for csv_file in csv_files:
         csv_path = os.path.join(csv_folder_path, csv_file)
         csv_data = pd.read_csv(csv_path)
-        
-        # Limpiar los nombres de las columnas, eliminando paréntesis inicial, comillas extra y la parte final ', 0)'
-        csv_data.columns = [re.sub(r"^\('|',? 0\)$|'$", "", col) for col in csv_data.columns]
-    
-        # Filtrar columnas de activación
-        activacion_columns = [col for col in csv_data.columns if re.match(r'^par_activacion_p[0-9]+$', col, re.IGNORECASE)]
-        
-        # Crear carpeta de salida para este archivo CSV
+
+        # Clean column names using the precompiled regex
+        csv_data.columns = [col_clean_re.sub("", col) for col in csv_data.columns]
+
+        # Get activation columns using the precompiled pattern
+        activacion_columns = [col for col in csv_data.columns if activation_pattern.match(col)]
+
+        # Load the base JSON once for this CSV file
+        base_json_path = os.path.join(JSON_DIR, archivo_base)
+        with open(base_json_path, "r") as f:
+            base_json = json.load(f)
+
+        # Precompute activation values for each activation column
+        activation_values_dict = {}
+        for col in activacion_columns:
+            match = project_pattern.search(col)
+            if match:
+                project_index = match.group(1)
+                param_name = f"activacion_P{project_index}"
+                if param_name in base_json['parameters']:
+                    windows = base_json['parameters'][param_name]['windows']
+                    adjusted_windows = windows[:-1] + [windows[-1] - 1]
+                    activation_values = csv_data[col].iloc[adjusted_windows].tolist()
+                    activation_values_dict[param_name] = activation_values
+
+        # Create output folder for this CSV file
         output_folder_name = f"po{output_folder_counter}"
         output_folder_path = os.path.join(JSON_RDM_DIR, output_folder_name)
         os.makedirs(output_folder_path, exist_ok=True)
         output_folder_counter += 1
-    
-        # Cargar el archivo JSON base #TODO: CHANGE THE LOCATION OF THE JSON FILE
-        with open(os.path.join(JSON_DIR, archivo_base), "r") as f:
-            json_data = json.load(f)
-            
-        # Generar archivos JSON para cada combinación de oferta y demanda
+
+        # Generate modified JSON files for each combination of demanda and oferta
         for demanda in reemplazos_demanda:
             for oferta in reemplazos_oferta:
-                modified_json = json.loads(json.dumps(json_data))  # Clonar el JSON original
-                
-                # Actualizar valores de activación en el JSON
-                for column in activacion_columns:
-                    project_index = re.search(r'P(\d+)', column).group(1)  # Esto captura solo el número después de la "P"
-                    param_name = f"activacion_P{project_index}"
-                    
+                # Clone the base JSON using deepcopy
+                modified_json = copy.deepcopy(base_json)
+
+                # Update activation parameters with precomputed values
+                for param_name, act_values in activation_values_dict.items():
                     if param_name in modified_json['parameters']:
-                        windows = modified_json['parameters'][param_name]['windows']
-                        adjusted_windows = windows[:-1] + [windows[-1] - 1]
-                        activacion_values = csv_data[column].iloc[adjusted_windows].tolist()
-                        modified_json['parameters'][param_name]['values'] = activacion_values
-    
-                # Reemplazar los textos de escenarios de demanda y oferta
-                modified_json_str = json.dumps(modified_json).replace("ANC02_CLIMIN_ECOACE", demanda).replace("1A, 0.90", oferta)
-                modified_json = json.loads(modified_json_str)
-    
-                # Crear nombre de archivo de salida
+                        modified_json['parameters'][param_name]['values'] = act_values
+
+                # Replace placeholder texts using the recursive replacement function
+                replacements = {
+                    "ANC02_CLIMIN_ECOACE": demanda,
+                    "1A, 0.90": oferta
+                }
+                modified_json = recursive_replace(modified_json, replacements)
+
+                # Construct the output filename and save the modified JSON
                 oferta_modificada = oferta.replace(", ", "_")
                 output_filename = f"{output_folder_name}_{demanda}_{oferta_modificada}.json"
                 output_path = os.path.join(output_folder_path, output_filename)
-    
-                # Guardar el archivo JSON modificado
+
                 with open(output_path, "w") as f:
                     json.dump(modified_json, f, indent=4)
-                
+
                 print(f"Archivo generado: {output_path}")

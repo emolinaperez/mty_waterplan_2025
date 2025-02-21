@@ -17,7 +17,8 @@ import json
 import pandas as pd
 import numpy as np
 import platypus
-from platypus.core import _EvaluateJob, Algorithm, PlatypusConfig, Solution, Variator
+from platypus.core import _EvaluateJob, Algorithm, Solution, Variator
+from platypus.config import PlatypusConfig
 import platypus.evaluator
 from platypus.evaluator import Job, ProcessPoolEvaluator, MultiprocessingEvaluator, MapEvaluator
 from platypus.types import Binary
@@ -27,16 +28,36 @@ import logging
 import copy
 import random
 import pickle
+import warnings
+import yaml
+import sys
+warnings.filterwarnings("ignore")
 
-json_base_path = 'C:\\Users\\guill\\OneDrive\\Documents\\Freelance\\FAMM - Plan Hídrico NL\\Working Files\\json_RDM'
-results_path = 'C:\\Users\\guill\\OneDrive\\Documents\\Freelance\\FAMM - Plan Hídrico NL\\Working Files\\RDM_results'
+# --- Define Paths ---
+SCRIPTS_DIR = os.path.dirname(os.path.realpath(__file__))
+PARENT_DIR = os.path.dirname(SCRIPTS_DIR)
+CONFIG_DIR = os.path.join(PARENT_DIR, 'config')
+JSON_DIR = os.path.join(CONFIG_DIR, 'json')
+YAML_DIR = os.path.join(CONFIG_DIR, 'yaml')
+JSON_RDM_DIR = os.path.join(PARENT_DIR, 'json_RDM')
+MODEL_OUPUT_DIR = os.path.join(PARENT_DIR, 'RDM_results')
 
-# Definir los directorios de trabajo divididos en bloques
-directorios_trabajo = [f"po{i}" for i in range(1, 973)]
+
+# Read arguments from the command line
+batch_yaml_name = sys.argv[1]
+batch_yaml_path = os.path.join(YAML_DIR, batch_yaml_name)
+
+# Load the YAML file with the directories for this batch
+with open(batch_yaml_path, 'r') as file:
+    batch_data = yaml.load(file, Loader=yaml.FullLoader)
+
+# Define working directories
+directorios_trabajo = batch_data['directories']
+
 
 # Crear el directorio de resultados si no existe
-if not os.path.exists(results_path):
-    os.makedirs(results_path)
+if not os.path.exists(MODEL_OUPUT_DIR):
+    os.makedirs(MODEL_OUPUT_DIR)
 
 # os.chdir('C:\\Users\\guill\\OneDrive\\Documents\\Freelance\\FAMM - Plan Hídrico NL\\Working Files')
 
@@ -297,7 +318,7 @@ def extract_and_display_recorders(model, demand_ts):
 
 # Iterar sobre cada directorio en directorios_trabajo
 for directorio in directorios_trabajo:
-    dir_path = os.path.join(json_base_path, directorio)
+    dir_path = os.path.join(JSON_RDM_DIR, directorio)
 
     # Verificar si el directorio existe
     if not os.path.exists(dir_path):
@@ -323,7 +344,7 @@ for directorio in directorios_trabajo:
 
         # Crear el nombre del archivo CSV de salida en results_path
         csv_filename = f"{json_file.replace('.json', '.csv')}"
-        csv_output_path = os.path.join(results_path, csv_filename)
+        csv_output_path = os.path.join(MODEL_OUPUT_DIR, csv_filename)
 
         # Guardar los resultados en el archivo CSV
         results_df.to_csv(csv_output_path, index=False)

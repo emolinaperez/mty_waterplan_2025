@@ -44,3 +44,7 @@ ehthumbs.db
 *.7z
 *.rar
 *.tar
+
+# Ignore model_results folder
+model_results/
+json_RDM/

@@ -48,3 +48,4 @@ ehthumbs.db
 # Ignore model_results folder
 model_results/
 json_RDM/
+RDM_results/

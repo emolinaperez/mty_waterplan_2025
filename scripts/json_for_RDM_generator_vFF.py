@@ -9,6 +9,7 @@ import os
 import json
 import pandas as pd
 import re
+from utils.utils import Utils
 
 # Definir los escenarios de demanda y oferta
 reemplazos_demanda = [
@@ -32,18 +33,29 @@ reemplazos_oferta = [
     "6C, 0.90", "6C, 0.95", "6C, 0.97", "7A, 0.90", "7A, 0.95", "7A, 0.97"
 ]
 
-# Definir la carpeta de trabajo donde están los archivos CSV
-base_csv_folder_path = r"C:\Users\L03565115\OneDrive\Documents\Freelance\FAMM - Plan Hídrico NL\Working Files\RDM_v2\model_results_server"
+# Definir paths
+SCRIPTS_DIR = os.path.dirname(os.path.realpath(__file__))
+PARENT_DIR = os.path.dirname(SCRIPTS_DIR)
+CONFIG_DIR = os.path.join(PARENT_DIR, 'config')
+JSON_DIR = os.path.join(CONFIG_DIR, 'json')
+YAML_DIR = os.path.join(CONFIG_DIR, 'yaml')
+MODEL_RESULTS_DIR = os.path.join(PARENT_DIR, 'model_results')
+JSON_RDM_DIR = os.path.join(PARENT_DIR, 'json_RDM')
 
-# Definir la carpeta de salida
-output_folder_base = r"C:\Users\L03565115\OneDrive\Documents\Freelance\FAMM - Plan Hídrico NL\Working Files\RDM_v2\json_RDM"
+# Make sure JSON_RDM_DIR exists
+os.makedirs(JSON_RDM_DIR, exist_ok=True)
+
+# Leer archivo YAML con la configuración de los archivos base
+utils = Utils()
+archivo_base = utils.read_yaml_file(os.path.join(YAML_DIR, 'copias_generadas_script_config.yaml'))['archivo_base']
+
 
 # Inicializar contador para las carpetas de salida
 output_folder_counter = 1
 
 # Loop over folders copias_generadas_1 to copias_generadas_27
 for folder_num in range(1, 28):
-    csv_folder_path = os.path.join(base_csv_folder_path, f"copias_generadas_{folder_num}")
+    csv_folder_path = os.path.join(MODEL_RESULTS_DIR, f"copias_generadas_{folder_num}")
     csv_files = [f for f in os.listdir(csv_folder_path) if f.endswith('.csv')]
 
     # Procesar cada archivo CSV
@@ -59,12 +71,12 @@ for folder_num in range(1, 28):
         
         # Crear carpeta de salida para este archivo CSV
         output_folder_name = f"po{output_folder_counter}"
-        output_folder_path = os.path.join(output_folder_base, output_folder_name)
+        output_folder_path = os.path.join(JSON_RDM_DIR, output_folder_name)
         os.makedirs(output_folder_path, exist_ok=True)
         output_folder_counter += 1
     
-        # Cargar el archivo JSON base
-        with open(r"C:\Users\L03565115\OneDrive\Documents\Freelance\FAMM - Plan Hídrico NL\Working Files\RDM_v2\json_basefile.json", "r") as f:
+        # Cargar el archivo JSON base #TODO: CHANGE THE LOCATION OF THE JSON FILE
+        with open(os.path.join(JSON_DIR, archivo_base), "r") as f:
             json_data = json.load(f)
             
         # Generar archivos JSON para cada combinación de oferta y demanda

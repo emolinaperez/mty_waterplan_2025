@@ -9,7 +9,16 @@ import os
 import json
 import pandas as pd
 import re
+import sys
 from utils.utils import Utils
+
+# Retrieve folder_num from command line arguments
+if len(sys.argv) != 2:
+    print("Usage: python json_for_RDM_generator_vFF_server_ver.py <folder_num>")
+    sys.exit(1)
+else:
+    folder_num = int(sys.argv[1])
+    
 
 # Definir los escenarios de demanda y oferta
 reemplazos_demanda = [
@@ -53,59 +62,58 @@ archivo_base = utils.read_yaml_file(os.path.join(YAML_DIR, 'copias_generadas_scr
 # Inicializar contador para las carpetas de salida
 output_folder_counter = 1
 
-# Loop over folders copias_generadas_1 to copias_generadas_27
-for folder_num in range(1, 28):
-    csv_folder_path = os.path.join(MODEL_RESULTS_DIR, f"copias_generadas_{folder_num}")
-    csv_files = [f for f in os.listdir(csv_folder_path) if f.endswith('.csv')]
+# Process the csv files for the specified folder number
+csv_folder_path = os.path.join(MODEL_RESULTS_DIR, f"copias_generadas_{folder_num}")
+csv_files = [f for f in os.listdir(csv_folder_path) if f.endswith('.csv')]
 
-    # Procesar cada archivo CSV
-    for csv_file in csv_files:
-        csv_path = os.path.join(csv_folder_path, csv_file)
-        csv_data = pd.read_csv(csv_path)
-        
-        # Limpiar los nombres de las columnas, eliminando paréntesis inicial, comillas extra y la parte final ', 0)'
-        csv_data.columns = [re.sub(r"^\('|',? 0\)$|'$", "", col) for col in csv_data.columns]
+# Procesar cada archivo CSV
+for csv_file in csv_files:
+    csv_path = os.path.join(csv_folder_path, csv_file)
+    csv_data = pd.read_csv(csv_path)
     
-        # Filtrar columnas de activación
-        activacion_columns = [col for col in csv_data.columns if re.match(r'^par_activacion_p[0-9]+$', col, re.IGNORECASE)]
-        
-        # Crear carpeta de salida para este archivo CSV
-        output_folder_name = f"po{output_folder_counter}"
-        output_folder_path = os.path.join(JSON_RDM_DIR, output_folder_name)
-        os.makedirs(output_folder_path, exist_ok=True)
-        output_folder_counter += 1
+    # Limpiar los nombres de las columnas, eliminando paréntesis inicial, comillas extra y la parte final ', 0)'
+    csv_data.columns = [re.sub(r"^\('|',? 0\)$|'$", "", col) for col in csv_data.columns]
+
+    # Filtrar columnas de activación
+    activacion_columns = [col for col in csv_data.columns if re.match(r'^par_activacion_p[0-9]+$', col, re.IGNORECASE)]
     
-        # Cargar el archivo JSON base
-        with open(os.path.join(JSON_DIR, archivo_base), "r") as f:
-            json_data = json.load(f)
+    # Crear carpeta de salida para este archivo CSV
+    output_folder_name = f"po{output_folder_counter}"
+    output_folder_path = os.path.join(JSON_RDM_DIR, output_folder_name)
+    os.makedirs(output_folder_path, exist_ok=True)
+    output_folder_counter += 1
+
+    # Cargar el archivo JSON base
+    with open(os.path.join(JSON_DIR, archivo_base), "r") as f:
+        json_data = json.load(f)
+        
+    # Generar archivos JSON para cada combinación de oferta y demanda
+    for demanda in reemplazos_demanda:
+        for oferta in reemplazos_oferta:
+            modified_json = json.loads(json.dumps(json_data))  # Clonar el JSON original
             
-        # Generar archivos JSON para cada combinación de oferta y demanda
-        for demanda in reemplazos_demanda:
-            for oferta in reemplazos_oferta:
-                modified_json = json.loads(json.dumps(json_data))  # Clonar el JSON original
+            # Actualizar valores de activación en el JSON
+            for column in activacion_columns:
+                project_index = re.search(r'P(\d+)', column).group(1)  # Esto captura solo el número después de la "P"
+                param_name = f"activacion_P{project_index}"
                 
-                # Actualizar valores de activación en el JSON
-                for column in activacion_columns:
-                    project_index = re.search(r'P(\d+)', column).group(1)  # Esto captura solo el número después de la "P"
-                    param_name = f"activacion_P{project_index}"
-                    
-                    if param_name in modified_json['parameters']:
-                        windows = modified_json['parameters'][param_name]['windows']
-                        adjusted_windows = windows[:-1] + [windows[-1] - 1]
-                        activacion_values = csv_data[column].iloc[adjusted_windows].tolist()
-                        modified_json['parameters'][param_name]['values'] = activacion_values
-    
-                # Reemplazar los textos de escenarios de demanda y oferta
-                modified_json_str = json.dumps(modified_json).replace("ANC02_CLIMIN_ECOACE", demanda).replace("1A, 0.90", oferta)
-                modified_json = json.loads(modified_json_str)
-    
-                # Crear nombre de archivo de salida
-                oferta_modificada = oferta.replace(", ", "_")
-                output_filename = f"{output_folder_name}_{demanda}_{oferta_modificada}.json"
-                output_path = os.path.join(output_folder_path, output_filename)
-    
-                # Guardar el archivo JSON modificado
-                with open(output_path, "w") as f:
-                    json.dump(modified_json, f, indent=4)
-                
-                print(f"Archivo generado: {output_path}")
+                if param_name in modified_json['parameters']:
+                    windows = modified_json['parameters'][param_name]['windows']
+                    adjusted_windows = windows[:-1] + [windows[-1] - 1]
+                    activacion_values = csv_data[column].iloc[adjusted_windows].tolist()
+                    modified_json['parameters'][param_name]['values'] = activacion_values
+
+            # Reemplazar los textos de escenarios de demanda y oferta
+            modified_json_str = json.dumps(modified_json).replace("ANC02_CLIMIN_ECOACE", demanda).replace("1A, 0.90", oferta)
+            modified_json = json.loads(modified_json_str)
+
+            # Crear nombre de archivo de salida
+            oferta_modificada = oferta.replace(", ", "_")
+            output_filename = f"{output_folder_name}_{demanda}_{oferta_modificada}.json"
+            output_path = os.path.join(output_folder_path, output_filename)
+
+            # Guardar el archivo JSON modificado
+            with open(output_path, "w") as f:
+                json.dump(modified_json, f, indent=4)
+            
+            print(f"Archivo generado: {output_path}")

@@ -1,0 +1,6 @@
+@echo off
+set SCRIPT=python json_for_RDM_generator_vFF_server_ver.py
+
+for /L %%i in (1,1,27) do (
+    start cmd /k %SCRIPT% %%i
+)

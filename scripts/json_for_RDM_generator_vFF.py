@@ -75,7 +75,7 @@ for folder_num in range(1, 28):
         os.makedirs(output_folder_path, exist_ok=True)
         output_folder_counter += 1
     
-        # Cargar el archivo JSON base #TODO: CHANGE THE LOCATION OF THE JSON FILE
+        # Cargar el archivo JSON base
         with open(os.path.join(JSON_DIR, archivo_base), "r") as f:
             json_data = json.load(f)
             

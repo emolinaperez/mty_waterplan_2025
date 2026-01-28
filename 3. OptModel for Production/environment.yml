@@ -1,0 +1,27 @@
+name: pywr_opt
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  # --- Python ---
+  - python=3.12.3
+
+  # --- Core scientific stack ---
+  - numpy=1.26.4
+  - pandas=2.2.2
+  - scipy=1.14.1
+  - matplotlib=3.8.4
+
+  # --- Pywr + solver ---
+  - pywr=1.26.0
+  - glpk=5.0
+
+  # --- Tooling ---
+  - ipython=8.25.0
+  - jupyterlab=4.0.11
+
+  # --- Pip-only deps ---
+  - pip
+  - pip:
+      - platypus-opt==1.3.1

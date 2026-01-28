@@ -1,0 +1,28 @@
+﻿project_ID;project_name;source_type;expected_flow;estimated_time_of_completion;capital_cost;om_costs;dependencies
+P1;Reducción de ANC;Eficiencia;0.49;12;500000000;0;
+P2;Reducción de ANC;Eficiencia;0.49;24;600000000;0;P1
+P3;Reducción de ANC;Eficiencia;0.49;24;750000000;0;P2
+P4;Inyección de ART a Buenos Aires;Reuso;0.89;72;3402942220;209335856.4;P12
+P5;Agua de proceso y contacto;Reuso;2.15;48;2000000000;189000000;
+P6;Uso indirecto de ART;Reuso;0.89;24;2797865057;80628478.34;
+P7;Uso indirecto de ART;Reuso;0.89;24;2797865057;80628478.34;P6
+P8;Uso indirecto de ART;Reuso;0.89;24;2797865057;80628478.34;P7
+P9;Uso indirecto de ART;Reuso;0.89;24;2797865057;80628478.34;P8
+P10;Uso indirecto de ART;Reuso;0.89;24;2797865057;80628478.34;P9
+P11;Uso indirecto de ART;Reuso;0.89;24;2797865057;80628478.34;P10
+P12;Uso indirecto de ART;Reuso;0.89;24;2797865057;80628478.34;P11
+P13;Recuperación de excedentes de riego;Reuso;4;36;30823346206;2027402894;
+P14;Presa Terreros;Superficial;2.58;84;8986330375;590969736.6;
+P15;Río Salinillas - Icamole;Superficial;1.8;72;10919160561;585944113.6;
+P16;Acueducto P. Venustiano Carranza - Salinillas - Monterrey;Superficial;1.2;96;31053846154;2042616959;
+P17;Tampaón Regional (NL-Tamp-SLP);Superficial;1.93;60;26027440000;3423993929;
+P18;Desalinizadora;Superficial;4.32;60;51999608520;2217770620;
+P19;Acueducto Vicente Guerrero - Mty;Superficial;3.85;84;21878846154;1439116494;
+P20;Acueducto P. Las Blancas - AMM;Superficial;3.45;48;20608461538;1355554891;
+P21;Tampaón - Mty;Superficial;3.85;60;67122046943;4415061205;
+P22;"Campo de pozos ""El Pajonal""";Subterránea;0.68;48;920607213.7;60469188.17;
+P23;Pozos en el AMM;Subterránea;0.49;84;115960242.8;7133426.068;
+P24;Túnel San Francisco II;Subterránea;0.28;12;500000000;32888308.73;
+P25;Subválveo de Río Conchos;Subterránea;0.3;48;123968384.4;7828904.324;
+P26;Pozos Sierra Gomas;Subterránea;0.06;36;332562503.1;21556571.53;
+P27;Pozos Congregación Calles;Subterránea;0.17;48;371316184.2;6487320.889;

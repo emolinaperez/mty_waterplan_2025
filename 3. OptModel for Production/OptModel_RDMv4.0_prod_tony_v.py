@@ -54,20 +54,19 @@ SEED = 12345
 BASE_DIR = os.getcwd()  # carpeta "Working Files v2"
 JSON_DIR = os.path.join(BASE_DIR, "1. OptModel_JSONs")
 DATA_DIR = os.path.join(BASE_DIR, "2. Data Inputs")
-RESULT_DIR = os.path.join(BASE_DIR, "3.1 model_results_server")
-
-# Create Result Dir if it does not exists
-os.makedirs(name=RESULT_DIR, exist_ok=True)
-
-# Crear el directorio de resultados si no existe
-if not os.path.exists(RESULT_DIR):
-    os.makedirs(RESULT_DIR)
+OUTPUT_DIR = os.path.join(BASE_DIR, "output")
+current_time = time.strftime("%Y%m%d-%H%M%S")
+RESULT_DIR = os.path.join(OUTPUT_DIR, f"opt_model_results_{current_time}")
 
 # === CARGA DE INPUTS CORREGIDOS ===
 supply_ts  = pd.read_csv(os.path.join(DATA_DIR, "supply_corrected.csv"),  delimiter=",", parse_dates=["Date"])
 demand_ts  = pd.read_csv(os.path.join(DATA_DIR, "demand_corrected.csv"),  delimiter=",", parse_dates=["Date"])
 anc_ts     = pd.read_csv(os.path.join(DATA_DIR, "anc_corrected.csv"),     delimiter=",", parse_dates=["Date"])
 projects   = pd.read_csv(os.path.join(DATA_DIR, "projects.csv"),          delimiter=",")
+
+# Create Result Dir if it does not exists
+os.makedirs(name=OUTPUT_DIR, exist_ok=True)
+os.makedirs(name=RESULT_DIR, exist_ok=True)
 
 class custom_HUX(Variator):
 
@@ -675,7 +674,7 @@ class CustomPlatypusWrapper(PlatypusWrapper):
 
         # Ejecutar el modelo Pywr y guardar estadísticas de la ejecución
         self.run_stats = self.model.run()
-        print(f"Run stats: {self.run_stats}")
+        # print(f"Run stats: {self.run_stats}")
 
         # # Verificar la salida final de las variables
         # print("Evaluando con los siguientes parámetros:")
@@ -713,7 +712,7 @@ class CustomPlatypusWrapper(PlatypusWrapper):
         # logger.info(f"Evaluation completed in {self.run_stats.time_taken:.2f} seconds "
                     # f"({self.run_stats.speed:.2f} ts/s).")
 
-        print(f"Setting objectives: {objectives}")
+        # print(f"Setting objectives: {objectives}")
 
         # Devolver los objetivos y restricciones
         if len(constraints) > 0:
@@ -754,7 +753,7 @@ def extract_and_display_recorders(model, demand_ts, algorithm_name):
     # plt.title(f"Recorder Data for {algorithm_name}")
     # plt.show()
 
-    print(f"Recorder Data for {algorithm_name}:")
+    # print(f"Recorder Data for {algorithm_name}:")
     # print(recorder_df_with_date.head())  # Display first few rows of the DataFrame
 
     return recorder_df_with_date
@@ -769,12 +768,13 @@ def apply_best_solution_and_evaluate(model, solution):
 
         if isinstance(var, TimeWindowBinaryParameter):
             if not np.all(np.isin(decision_value, [0, 1])):
-                print(f"Error: Invalid binary values in variable {ivar}: {decision_value}")
+                # print(f"Error: Invalid binary values in variable {ivar}: {decision_value}")
                 raise ValueError(f"Variable {ivar} has invalid binary values.")
                 
             var.set_double_variables(np.array(decision_value))  # Pass the full array of decision values
         else:
-            print(f"Warning: Variable {ivar} is not a TimeWindowBinaryParameter.")
+            # print(f"Warning: Variable {ivar} is not a TimeWindowBinaryParameter.")
+            pass
     
     model.run()
 
@@ -795,7 +795,7 @@ def run_optimisation(algorithm, wrapper, algorithm_name, demand_ts, max_evaluati
     end_time = time.time()
 
     # Mostrar tiempo de ejecución
-    print(f"{algorithm_name} completado en {end_time - start_time:.2f} segundos.")
+    # print(f"{algorithm_name} completado en {end_time - start_time:.2f} segundos.")
     
     # Obtén la mejor solución del algoritmo
     best_solution = algorithm.result[0]
@@ -807,7 +807,7 @@ def run_optimisation(algorithm, wrapper, algorithm_name, demand_ts, max_evaluati
     recorder_df = extract_and_display_recorders(wrapper.model, demand_ts_reset, algorithm_name)
     
     # Mostrar la mejor solución obtenida
-    print(f"Mejor solución con {algorithm_name}: {best_solution}")
+    # print(f"Mejor solución con {algorithm_name}: {best_solution}")
     
     return best_solution, end_time - start_time, recorder_df
 
@@ -876,13 +876,13 @@ def run_model_with_json(json_path, result_csv_path, result_plot_path):
     plt.savefig(result_plot_path)
     plt.close()
 
-    # Include original comments and prints
-    print(f"Recorder Data for Genetic Algorithm stored in {result_csv_path}")
-    print(f"Execution time for GA: {time_ga} seconds")
-    print(f"Objectives for GA: {best_solution_ga.objectives}")
-    print(f"Constraints for GA: {best_solution_ga.constraints}")
-    print(f"Feasibility of GA Solution: {best_solution_ga.feasible}")
-    print(f"Objective plot saved in {result_plot_path}")
+    # # Include original comments and prints
+    # print(f"Recorder Data for Genetic Algorithm stored in {result_csv_path}")
+    # print(f"Execution time for GA: {time_ga} seconds")
+    # print(f"Objectives for GA: {best_solution_ga.objectives}")
+    # print(f"Constraints for GA: {best_solution_ga.constraints}")
+    # print(f"Feasibility of GA Solution: {best_solution_ga.feasible}")
+    # print(f"Objective plot saved in {result_plot_path}")
 
     return best_solution_ga, time_ga, recorder_df_ga
 
@@ -906,10 +906,10 @@ def run_dir_trabajo(numero_dir_trabajo):
     directorio = os.path.join(JSON_DIR, f"copias_generadas_{numero_dir_trabajo}")
 
     if not os.path.isdir(directorio):
-        print(f"Directorio no encontrado: {directorio}")
+        # print(f"Directorio no encontrado: {directorio}")
         return
 
-    print(f"Procesando archivos en {directorio}")
+    # # print(f"Procesando archivos en {directorio}")
 
     # Obtener lista de archivos JSON en el directorio
     json_files = [f for f in os.listdir(directorio) if f.endswith(".json")]

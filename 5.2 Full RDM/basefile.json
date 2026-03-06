@@ -193,7 +193,7 @@
         {
             "name": "oferta_P3_delayed",
             "type": "DelayNode",
-            "timesteps": 36,
+            "timesteps": 24,
             "cost": -1
         },
         {
@@ -1035,6 +1035,9 @@
                 0,
                 0
             ],
+            "dependencies": {
+                "activacion_P4": "activacion_P12"
+            },
             "is_variable": true
         },
         "activacion_P5": {
@@ -3085,7 +3088,7 @@
         "par_margen_de_reserva_rest": {
             "type": "MinParameterRecorder",
             "parameter": "margen_de_reserva",
-            "constraint_lower_bounds": 1.5
+            "constraint_lower_bounds": 3.0
         },
         "par_costos_totales": {
             "type": "numpyarrayparameterrecorder",

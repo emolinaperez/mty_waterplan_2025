@@ -44,23 +44,28 @@ warnings.filterwarnings(
 )
 
 
-
-json_base_path = r"D:\guillermo_sim_3\5.2 Full RDM\json_RDM"
-results_path = r"D:\guillermo_sim_3\6.2 Full RDM Results\RDM_results"
-data_inputs_path = r"D:\guillermo_sim_3\5.2 Full RDM\2. Data Inputs"
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+JSON_OUTPUT_BASE_DIR = os.path.join(SCRIPT_DIR, "output_json")
+EXECUTION_RUN_ID = "20260128-122156" # Replace with the actual run ID used in optimization
+JSON_OUTPUT_FOLDER_NAME = f"json_RDM_{EXECUTION_RUN_ID}"
+JSON_OUTPUT_FINAL_DIR = os.path.join(JSON_OUTPUT_BASE_DIR, JSON_OUTPUT_FOLDER_NAME)
+RDM_DIR_PATH = os.path.join(SCRIPT_DIR, "RDM_results")
+RESULTS_DIR_PATH = os.path.join(RDM_DIR_PATH, f"RDM_results_{EXECUTION_RUN_ID}")
+DATA_INPUTS_PATH = os.path.join(SCRIPT_DIR, "2. Data Inputs")
 
 csv_files = ['supply_corrected.csv', 'demand_corrected.csv', 'anc_corrected.csv', 'projects.csv']
 
 # Definir los directorios de trabajo divididos en bloques
 directorios_trabajo = [
-    d for d in os.listdir(json_base_path)
-    if d.startswith("po_") and os.path.isdir(os.path.join(json_base_path, d))
+    d for d in os.listdir(JSON_OUTPUT_FINAL_DIR)
+    if d.startswith("po_") and os.path.isdir(os.path.join(JSON_OUTPUT_FINAL_DIR, d))
 ]
 
+os.makedirs(RDM_DIR_PATH, exist_ok=True)
 
 # Crear el directorio de resultados si no existe
-if not os.path.exists(results_path):
-    os.makedirs(results_path)
+if not os.path.exists(RESULTS_DIR_PATH):
+    os.makedirs(RESULTS_DIR_PATH)
 
 # os.chdir('C:\\Users\\guill\\OneDrive\\Documents\\Freelance\\FAMM - Plan Hídrico NL\\Working Files')
 
@@ -407,7 +412,7 @@ def extract_and_display_recorders(model, demand_ts):
     return recorder_df_with_date
 
 def process_directory(directorio):
-    dir_path = os.path.join(json_base_path, directorio)
+    dir_path = os.path.join(JSON_OUTPUT_FINAL_DIR, directorio)
 
     if not os.path.exists(dir_path):
         return f"{directorio} skipped (missing)"
@@ -417,7 +422,7 @@ def process_directory(directorio):
     os.makedirs(data_subdir, exist_ok=True)
 
     for csv_file in csv_files:
-        src = os.path.join(data_inputs_path, csv_file)
+        src = os.path.join(DATA_INPUTS_PATH, csv_file)
         dst = os.path.join(data_subdir, csv_file)
 
         if os.path.exists(dst):
@@ -438,7 +443,7 @@ def process_directory(directorio):
 
             df = model.to_dataframe()
             out_csv = os.path.join(
-                results_path,
+                RESULTS_DIR_PATH,
                 f"{directorio}_{json_file.replace('.json', '.csv')}"
             )
 
@@ -454,7 +459,7 @@ def process_directory(directorio):
 
 if __name__ == "__main__":
 
-    max_workers = min(os.cpu_count(), 32)  # keep conservative for Pywr
+    max_workers = min(os.cpu_count(), 48)  # keep conservative for Pywr
 
     with ProcessPoolExecutor(max_workers=max_workers) as executor:
 

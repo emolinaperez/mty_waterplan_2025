@@ -55,8 +55,12 @@ BASE_DIR = os.getcwd()  # carpeta "Working Files v2"
 JSON_DIR = os.path.join(BASE_DIR, "1. OptModel_JSONs")
 DATA_DIR = os.path.join(BASE_DIR, "2. Data Inputs")
 OUTPUT_DIR = os.path.join(BASE_DIR, "output")
-current_time = time.strftime("%Y%m%d-%H%M%S")
-RESULT_DIR = os.path.join(OUTPUT_DIR, f"opt_model_results_{current_time}")
+# Use a single run id across parallel workers to avoid multiple timestamped dirs.
+RUN_ID = os.environ.get("OPT_MODEL_RUN_ID")
+if RUN_ID is None:
+    RUN_ID = time.strftime("%Y%m%d-%H%M%S")
+    os.environ["OPT_MODEL_RUN_ID"] = RUN_ID
+RESULT_DIR = os.path.join(OUTPUT_DIR, f"opt_model_results_{RUN_ID}")
 
 # === CARGA DE INPUTS CORREGIDOS ===
 supply_ts  = pd.read_csv(os.path.join(DATA_DIR, "supply_corrected.csv"),  delimiter=",", parse_dates=["Date"])

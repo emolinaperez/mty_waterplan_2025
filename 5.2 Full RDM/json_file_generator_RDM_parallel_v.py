@@ -35,9 +35,17 @@ reemplazos_oferta = [
     "6C, 0.90", "6C, 0.95", "6C, 0.97", "7A, 0.90", "7A, 0.95", "7A, 0.97"
 ]
 
-BASE_CSV_FOLDER = r"D:\guillermo_sim_3\3. OptModel for Production\3.1 model_results_server"
-OUTPUT_BASE = r"D:\guillermo_sim_3\5.2 Full RDM\json_RDM"
-BASE_JSON_PATH = r"D:\guillermo_sim_3\5.2 Full RDM\basefile.json"
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+PARENT_DIR = os.path.dirname(SCRIPT_DIR)
+OPTIMIZATION_OUTPUT_DIR = os.path.join(PARENT_DIR, "3. OptModel for Production", "output")
+JSON_OUTPUT_BASE_DIR = os.path.join(SCRIPT_DIR, "output_json")
+BASE_JSON_FILE_PATH = os.path.join(SCRIPT_DIR, "basefile.json")
+EXECUTION_RUN_ID = "20260128-122156" # Replace with the actual run ID used in optimization
+OPTIMIZATION_RESULTS_FOLDER_NAME = f"opt_model_results_{EXECUTION_RUN_ID}"
+OPTIMIZATION_RESULTS_DIR = os.path.join(OPTIMIZATION_OUTPUT_DIR, OPTIMIZATION_RESULTS_FOLDER_NAME)
+JSON_OUTPUT_FOLDER_NAME = f"json_RDM_{EXECUTION_RUN_ID}"
+JSON_OUTPUT_FINAL_DIR = os.path.join(JSON_OUTPUT_BASE_DIR, JSON_OUTPUT_FOLDER_NAME)
+
 
 
 # ----------------------------
@@ -45,10 +53,10 @@ BASE_JSON_PATH = r"D:\guillermo_sim_3\5.2 Full RDM\basefile.json"
 # ----------------------------
 def process_folder(folder_num: int):
 
-    csv_folder = os.path.join(BASE_CSV_FOLDER, f"copias_generadas_{folder_num}")
+    csv_folder = os.path.join(OPTIMIZATION_RESULTS_DIR, f"copias_generadas_{folder_num}")
     csv_files = [f for f in os.listdir(csv_folder) if f.endswith(".csv")]
 
-    with open(BASE_JSON_PATH, "r") as f:
+    with open(BASE_JSON_FILE_PATH, "r") as f:
         base_json = json.load(f)
 
     for i, csv_file in enumerate(csv_files, start=1):
@@ -65,7 +73,7 @@ def process_folder(folder_num: int):
         ]
 
         output_folder_name = f"po_{folder_num}_{i}"
-        output_folder = os.path.join(OUTPUT_BASE, output_folder_name)
+        output_folder = os.path.join(JSON_OUTPUT_FINAL_DIR, output_folder_name)
         os.makedirs(output_folder, exist_ok=True)
 
         for demanda in reemplazos_demanda:

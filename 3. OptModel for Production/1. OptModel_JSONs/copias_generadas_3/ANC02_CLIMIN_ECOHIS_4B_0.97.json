@@ -1,8 +1,8 @@
 {
     "metadata": {
-        "title": "Modelo de optimizaci\u00c3\u00b3n",
-        "description": "Modelo optimizable con universo de proyectos ajustado a retroalimentaci\u00c3\u00b3n discutida con Rodrigo. Cambios principales: Dependencias de proyectos ANC con grupo de exclusi\u00f3n y cambio en P5 Agua de procesos y contacto",
-        "minimum_version": "4.0"
+        "title": "Basefile OptModel - 25 proyectos activos",
+        "description": "BASEFILE - P5 y P26 deshabilitados, P19 activado ex\u00c3\u00b3genamente al inicio, Percentil 16",
+        "minimum_version": "5.1"
     },
     "timestepper": {
         "start": "2026-01-01",
@@ -43,7 +43,7 @@
         {
             "name": "oferta_P5",
             "type": "input",
-            "max_flow": "flujo_max_P5",
+            "max_flow": "oferta_activada_P5",
             "cost": -1
         },
         {
@@ -211,7 +211,7 @@
         {
             "name": "oferta_P6_delayed",
             "type": "DelayNode",
-            "timesteps": 24,
+            "timesteps": 36,
             "cost": -1
         },
         {
@@ -648,31 +648,23 @@
             "table": "nrw",
             "column": "ANC02_CLIMIN_ECOHIS"
         },
-        "flujo_demanda": {
-            "type": "FlowParameter",
-            "node": "demanda"
-        },
-        "flujo_anc": {
-            "type": "FlowParameter",
-            "node": "anc"
-        },
-        "flujo_demanda_total": {
+        "demanda_total_req": {
             "type": "aggregated",
             "agg_func": "sum",
             "parameters": [
-                "flujo_demanda",
-                "flujo_anc"
+                "demanda_req",
+                "anc_req"
             ]
         },
         "menos_uno": {
             "type": "constant",
             "value": -1
         },
-        "flujo_demanda_total_negativo": {
+        "demanda_total_req_negativa": {
             "type": "aggregated",
             "agg_func": "product",
             "parameters": [
-                "flujo_demanda_total",
+                "demanda_total_req",
                 "menos_uno"
             ]
         },
@@ -719,22 +711,6 @@
             "parameters": [
                 "art_a_reuso",
                 "cero"
-            ]
-        },
-        "flujo_demanda_P5": {
-            "type": "aggregated",
-            "agg_func": "product",
-            "parameters": [
-                "flujo_demanda",
-                "porc_demanda_P5"
-            ]
-        },
-        "flujo_max_P5": {
-            "type": "aggregated",
-            "agg_func": "min",
-            "parameters": [
-                "flujo_demanda_P5",
-                "oferta_activada_P5"
             ]
         },
         "oferta_sostenible_base": {
@@ -1476,18 +1452,17 @@
                 300
             ],
             "values": [
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0
-            ],
-            "is_variable": true
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1
+            ]
         },
         "activacion_P20": {
             "type": "TimeWindowBinaryParameter",
@@ -1682,8 +1657,7 @@
                 0,
                 0,
                 0
-            ],
-            "is_variable": true
+            ]
         },
         "activacion_P27": {
             "type": "TimeWindowBinaryParameter",
@@ -1929,62 +1903,397 @@
                 "activacion_P27"
             ]
         },
-        "oferta_sostenible_art": {
+        "activacion_efectiva_P1": {
+            "type": "DelayedActivationParameter",
+            "activation_parameter": "activacion_P1",
+            "delay": 12
+        },
+        "activacion_efectiva_P2": {
+            "type": "DelayedActivationParameter",
+            "activation_parameter": "activacion_P2",
+            "delay": 24
+        },
+        "activacion_efectiva_P3": {
+            "type": "DelayedActivationParameter",
+            "activation_parameter": "activacion_P3",
+            "delay": 24
+        },
+        "activacion_efectiva_P4": {
+            "type": "DelayedActivationParameter",
+            "activation_parameter": "activacion_P4",
+            "delay": 72
+        },
+        "activacion_efectiva_P5": {
+            "type": "DelayedActivationParameter",
+            "activation_parameter": "activacion_P5",
+            "delay": 48
+        },
+        "activacion_efectiva_P6": {
+            "type": "DelayedActivationParameter",
+            "activation_parameter": "activacion_P6",
+            "delay": 36
+        },
+        "activacion_efectiva_P7": {
+            "type": "DelayedActivationParameter",
+            "activation_parameter": "activacion_P7",
+            "delay": 24
+        },
+        "activacion_efectiva_P8": {
+            "type": "DelayedActivationParameter",
+            "activation_parameter": "activacion_P8",
+            "delay": 24
+        },
+        "activacion_efectiva_P9": {
+            "type": "DelayedActivationParameter",
+            "activation_parameter": "activacion_P9",
+            "delay": 24
+        },
+        "activacion_efectiva_P10": {
+            "type": "DelayedActivationParameter",
+            "activation_parameter": "activacion_P10",
+            "delay": 24
+        },
+        "activacion_efectiva_P11": {
+            "type": "DelayedActivationParameter",
+            "activation_parameter": "activacion_P11",
+            "delay": 24
+        },
+        "activacion_efectiva_P12": {
+            "type": "DelayedActivationParameter",
+            "activation_parameter": "activacion_P12",
+            "delay": 24
+        },
+        "activacion_efectiva_P13": {
+            "type": "DelayedActivationParameter",
+            "activation_parameter": "activacion_P13",
+            "delay": 36
+        },
+        "activacion_efectiva_P14": {
+            "type": "DelayedActivationParameter",
+            "activation_parameter": "activacion_P14",
+            "delay": 84
+        },
+        "activacion_efectiva_P15": {
+            "type": "DelayedActivationParameter",
+            "activation_parameter": "activacion_P15",
+            "delay": 72
+        },
+        "activacion_efectiva_P16": {
+            "type": "DelayedActivationParameter",
+            "activation_parameter": "activacion_P16",
+            "delay": 96
+        },
+        "activacion_efectiva_P17": {
+            "type": "DelayedActivationParameter",
+            "activation_parameter": "activacion_P17",
+            "delay": 60
+        },
+        "activacion_efectiva_P18": {
+            "type": "DelayedActivationParameter",
+            "activation_parameter": "activacion_P18",
+            "delay": 60
+        },
+        "activacion_efectiva_P19": {
+            "type": "DelayedActivationParameter",
+            "activation_parameter": "activacion_P19",
+            "delay": 84
+        },
+        "activacion_efectiva_P20": {
+            "type": "DelayedActivationParameter",
+            "activation_parameter": "activacion_P20",
+            "delay": 48
+        },
+        "activacion_efectiva_P21": {
+            "type": "DelayedActivationParameter",
+            "activation_parameter": "activacion_P21",
+            "delay": 60
+        },
+        "activacion_efectiva_P22": {
+            "type": "DelayedActivationParameter",
+            "activation_parameter": "activacion_P22",
+            "delay": 48
+        },
+        "activacion_efectiva_P23": {
+            "type": "DelayedActivationParameter",
+            "activation_parameter": "activacion_P23",
+            "delay": 84
+        },
+        "activacion_efectiva_P24": {
+            "type": "DelayedActivationParameter",
+            "activation_parameter": "activacion_P24",
+            "delay": 12
+        },
+        "activacion_efectiva_P25": {
+            "type": "DelayedActivationParameter",
+            "activation_parameter": "activacion_P25",
+            "delay": 48
+        },
+        "activacion_efectiva_P26": {
+            "type": "DelayedActivationParameter",
+            "activation_parameter": "activacion_P26",
+            "delay": 36
+        },
+        "activacion_efectiva_P27": {
+            "type": "DelayedActivationParameter",
+            "activation_parameter": "activacion_P27",
+            "delay": 48
+        },
+        "oferta_efectiva_P1": {
             "type": "aggregated",
-            "agg_func": "sum",
+            "agg_func": "product",
             "parameters": [
-                "oferta_activada_P4",
-                "oferta_activada_P5",
-                "oferta_activada_P6",
-                "oferta_activada_P7",
-                "oferta_activada_P8",
-                "oferta_activada_P9",
-                "oferta_activada_P10",
-                "oferta_activada_P11",
-                "oferta_activada_P12",
-                "oferta_activada_P13"
+                "oferta_sostenible_P1",
+                "activacion_efectiva_P1"
             ]
         },
-        "oferta_sostenible_total": {
+        "oferta_efectiva_P2": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P2",
+                "activacion_efectiva_P2"
+            ]
+        },
+        "oferta_efectiva_P3": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P3",
+                "activacion_efectiva_P3"
+            ]
+        },
+        "oferta_efectiva_P4": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P4",
+                "activacion_efectiva_P4"
+            ]
+        },
+        "oferta_efectiva_P5": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P5",
+                "activacion_efectiva_P5"
+            ]
+        },
+        "oferta_efectiva_P6": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P6",
+                "activacion_efectiva_P6"
+            ]
+        },
+        "oferta_efectiva_P7": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P7",
+                "activacion_efectiva_P7"
+            ]
+        },
+        "oferta_efectiva_P8": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P8",
+                "activacion_efectiva_P8"
+            ]
+        },
+        "oferta_efectiva_P9": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P9",
+                "activacion_efectiva_P9"
+            ]
+        },
+        "oferta_efectiva_P10": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P10",
+                "activacion_efectiva_P10"
+            ]
+        },
+        "oferta_efectiva_P11": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P11",
+                "activacion_efectiva_P11"
+            ]
+        },
+        "oferta_efectiva_P12": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P12",
+                "activacion_efectiva_P12"
+            ]
+        },
+        "oferta_efectiva_P13": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P13",
+                "activacion_efectiva_P13"
+            ]
+        },
+        "oferta_efectiva_P14": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P14",
+                "activacion_efectiva_P14"
+            ]
+        },
+        "oferta_efectiva_P15": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P15",
+                "activacion_efectiva_P15"
+            ]
+        },
+        "oferta_efectiva_P16": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P16",
+                "activacion_efectiva_P16"
+            ]
+        },
+        "oferta_efectiva_P17": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P17",
+                "activacion_efectiva_P17"
+            ]
+        },
+        "oferta_efectiva_P18": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P18",
+                "activacion_efectiva_P18"
+            ]
+        },
+        "oferta_efectiva_P19": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P19",
+                "activacion_efectiva_P19"
+            ]
+        },
+        "oferta_efectiva_P20": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P20",
+                "activacion_efectiva_P20"
+            ]
+        },
+        "oferta_efectiva_P21": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P21",
+                "activacion_efectiva_P21"
+            ]
+        },
+        "oferta_efectiva_P22": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P22",
+                "activacion_efectiva_P22"
+            ]
+        },
+        "oferta_efectiva_P23": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P23",
+                "activacion_efectiva_P23"
+            ]
+        },
+        "oferta_efectiva_P24": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P24",
+                "activacion_efectiva_P24"
+            ]
+        },
+        "oferta_efectiva_P25": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P25",
+                "activacion_efectiva_P25"
+            ]
+        },
+        "oferta_efectiva_P26": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P26",
+                "activacion_efectiva_P26"
+            ]
+        },
+        "oferta_efectiva_P27": {
+            "type": "aggregated",
+            "agg_func": "product",
+            "parameters": [
+                "oferta_sostenible_P27",
+                "activacion_efectiva_P27"
+            ]
+        },
+        "oferta_sostenible_total_efectiva": {
             "type": "aggregated",
             "agg_func": "sum",
             "parameters": [
                 "oferta_sostenible_base",
-                "oferta_activada_P1",
-                "oferta_activada_P2",
-                "oferta_activada_P3",
-                "oferta_activada_P4",
-                "oferta_activada_P5",
-                "oferta_activada_P6",
-                "oferta_activada_P7",
-                "oferta_activada_P8",
-                "oferta_activada_P9",
-                "oferta_activada_P10",
-                "oferta_activada_P11",
-                "oferta_activada_P12",
-                "oferta_activada_P13",
-                "oferta_activada_P14",
-                "oferta_activada_P15",
-                "oferta_activada_P16",
-                "oferta_activada_P17",
-                "oferta_activada_P18",
-                "oferta_activada_P19",
-                "oferta_activada_P20",
-                "oferta_activada_P21",
-                "oferta_activada_P22",
-                "oferta_activada_P23",
-                "oferta_activada_P24",
-                "oferta_activada_P25",
-                "oferta_activada_P26",
-                "oferta_activada_P27"
+                "oferta_efectiva_P1",
+                "oferta_efectiva_P2",
+                "oferta_efectiva_P3",
+                "oferta_efectiva_P4",
+                "oferta_efectiva_P5",
+                "oferta_efectiva_P6",
+                "oferta_efectiva_P7",
+                "oferta_efectiva_P8",
+                "oferta_efectiva_P9",
+                "oferta_efectiva_P10",
+                "oferta_efectiva_P11",
+                "oferta_efectiva_P12",
+                "oferta_efectiva_P13",
+                "oferta_efectiva_P14",
+                "oferta_efectiva_P15",
+                "oferta_efectiva_P16",
+                "oferta_efectiva_P17",
+                "oferta_efectiva_P18",
+                "oferta_efectiva_P19",
+                "oferta_efectiva_P20",
+                "oferta_efectiva_P21",
+                "oferta_efectiva_P22",
+                "oferta_efectiva_P23",
+                "oferta_efectiva_P24",
+                "oferta_efectiva_P25",
+                "oferta_efectiva_P26",
+                "oferta_efectiva_P27"
             ]
         },
         "margen_de_reserva": {
             "type": "aggregated",
             "agg_func": "sum",
             "parameters": [
-                "oferta_sostenible_total",
-                "flujo_demanda_total_negativo"
+                "oferta_sostenible_total_efectiva",
+                "demanda_total_req_negativa"
             ]
         },
         "costo_capital_P1": {
@@ -3093,13 +3402,242 @@
             "type": "numpyarrayparameterrecorder",
             "parameter": "activacion_P27"
         },
+        "par_oferta_sostenible_base": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "oferta_sostenible_base"
+        },
+        "par_activacion_efectiva_P1": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_efectiva_P1"
+        },
+        "par_activacion_efectiva_P2": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_efectiva_P2"
+        },
+        "par_activacion_efectiva_P3": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_efectiva_P3"
+        },
+        "par_activacion_efectiva_P4": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_efectiva_P4"
+        },
+        "par_activacion_efectiva_P5": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_efectiva_P5"
+        },
+        "par_activacion_efectiva_P6": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_efectiva_P6"
+        },
+        "par_activacion_efectiva_P7": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_efectiva_P7"
+        },
+        "par_activacion_efectiva_P8": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_efectiva_P8"
+        },
+        "par_activacion_efectiva_P9": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_efectiva_P9"
+        },
+        "par_activacion_efectiva_P10": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_efectiva_P10"
+        },
+        "par_activacion_efectiva_P11": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_efectiva_P11"
+        },
+        "par_activacion_efectiva_P12": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_efectiva_P12"
+        },
+        "par_activacion_efectiva_P13": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_efectiva_P13"
+        },
+        "par_activacion_efectiva_P14": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_efectiva_P14"
+        },
+        "par_activacion_efectiva_P15": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_efectiva_P15"
+        },
+        "par_activacion_efectiva_P16": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_efectiva_P16"
+        },
+        "par_activacion_efectiva_P17": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_efectiva_P17"
+        },
+        "par_activacion_efectiva_P18": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_efectiva_P18"
+        },
+        "par_activacion_efectiva_P19": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_efectiva_P19"
+        },
+        "par_activacion_efectiva_P20": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_efectiva_P20"
+        },
+        "par_activacion_efectiva_P21": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_efectiva_P21"
+        },
+        "par_activacion_efectiva_P22": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_efectiva_P22"
+        },
+        "par_activacion_efectiva_P23": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_efectiva_P23"
+        },
+        "par_activacion_efectiva_P24": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_efectiva_P24"
+        },
+        "par_activacion_efectiva_P25": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_efectiva_P25"
+        },
+        "par_activacion_efectiva_P26": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_efectiva_P26"
+        },
+        "par_activacion_efectiva_P27": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "activacion_efectiva_P27"
+        },
+        "par_oferta_efectiva_P1": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "oferta_efectiva_P1"
+        },
+        "par_oferta_efectiva_P2": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "oferta_efectiva_P2"
+        },
+        "par_oferta_efectiva_P3": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "oferta_efectiva_P3"
+        },
+        "par_oferta_efectiva_P4": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "oferta_efectiva_P4"
+        },
+        "par_oferta_efectiva_P5": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "oferta_efectiva_P5"
+        },
+        "par_oferta_efectiva_P6": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "oferta_efectiva_P6"
+        },
+        "par_oferta_efectiva_P7": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "oferta_efectiva_P7"
+        },
+        "par_oferta_efectiva_P8": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "oferta_efectiva_P8"
+        },
+        "par_oferta_efectiva_P9": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "oferta_efectiva_P9"
+        },
+        "par_oferta_efectiva_P10": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "oferta_efectiva_P10"
+        },
+        "par_oferta_efectiva_P11": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "oferta_efectiva_P11"
+        },
+        "par_oferta_efectiva_P12": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "oferta_efectiva_P12"
+        },
+        "par_oferta_efectiva_P13": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "oferta_efectiva_P13"
+        },
+        "par_oferta_efectiva_P14": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "oferta_efectiva_P14"
+        },
+        "par_oferta_efectiva_P15": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "oferta_efectiva_P15"
+        },
+        "par_oferta_efectiva_P16": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "oferta_efectiva_P16"
+        },
+        "par_oferta_efectiva_P17": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "oferta_efectiva_P17"
+        },
+        "par_oferta_efectiva_P18": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "oferta_efectiva_P18"
+        },
+        "par_oferta_efectiva_P19": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "oferta_efectiva_P19"
+        },
+        "par_oferta_efectiva_P20": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "oferta_efectiva_P20"
+        },
+        "par_oferta_efectiva_P21": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "oferta_efectiva_P21"
+        },
+        "par_oferta_efectiva_P22": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "oferta_efectiva_P22"
+        },
+        "par_oferta_efectiva_P23": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "oferta_efectiva_P23"
+        },
+        "par_oferta_efectiva_P24": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "oferta_efectiva_P24"
+        },
+        "par_oferta_efectiva_P25": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "oferta_efectiva_P25"
+        },
+        "par_oferta_efectiva_P26": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "oferta_efectiva_P26"
+        },
+        "par_oferta_efectiva_P27": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "oferta_efectiva_P27"
+        },
+        "par_oferta_sostenible_total_efectiva": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "oferta_sostenible_total_efectiva"
+        },
+        "par_demanda_total_req_negativa": {
+            "type": "numpyarrayparameterrecorder",
+            "parameter": "demanda_total_req_negativa"
+        },
         "par_margen_de_reserva": {
             "type": "numpyarrayparameterrecorder",
             "parameter": "margen_de_reserva"
         },
         "par_margen_de_reserva_rest": {
-            "type": "MinParameterRecorder",
+            "type": "PercentileParameterRecorder",
             "parameter": "margen_de_reserva",
+            "percentile": 16,
             "constraint_lower_bounds": 3.0
         },
         "par_costos_totales": {

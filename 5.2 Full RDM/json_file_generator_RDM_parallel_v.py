@@ -9,6 +9,7 @@ import pandas as pd
 import re
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from tqdm import tqdm
+import yaml
 
 
 # ----------------------------
@@ -40,13 +41,17 @@ PARENT_DIR = os.path.dirname(SCRIPT_DIR)
 OPTIMIZATION_OUTPUT_DIR = os.path.join(PARENT_DIR, "3. OptModel for Production", "output")
 JSON_OUTPUT_BASE_DIR = os.path.join(SCRIPT_DIR, "output_json")
 BASE_JSON_FILE_PATH = os.path.join(SCRIPT_DIR, "basefile.json")
-EXECUTION_RUN_ID = "20260128-122156" # Replace with the actual run ID used in optimization
+
+# Read config.yaml for run_id
+CONFIG_PATH = os.path.join(SCRIPT_DIR, "config.yaml")
+with open(CONFIG_PATH, "r") as f:
+    config = yaml.safe_load(f)
+    EXECUTION_RUN_ID = config.get("run_id")
+
 OPTIMIZATION_RESULTS_FOLDER_NAME = f"opt_model_results_{EXECUTION_RUN_ID}"
 OPTIMIZATION_RESULTS_DIR = os.path.join(OPTIMIZATION_OUTPUT_DIR, OPTIMIZATION_RESULTS_FOLDER_NAME)
 JSON_OUTPUT_FOLDER_NAME = f"json_RDM_{EXECUTION_RUN_ID}"
 JSON_OUTPUT_FINAL_DIR = os.path.join(JSON_OUTPUT_BASE_DIR, JSON_OUTPUT_FOLDER_NAME)
-
-
 
 # ----------------------------
 # Worker function
@@ -62,6 +67,10 @@ def process_folder(folder_num: int):
     for i, csv_file in enumerate(csv_files, start=1):
         csv_path = os.path.join(csv_folder, csv_file)
         csv_data = pd.read_csv(csv_path)
+
+        # Remove Pywr timestep-0 row (all zeros) if present
+        if len(csv_data) == 301:
+            csv_data = csv_data.iloc[1:].reset_index(drop=True)
 
         csv_data.columns = [
             re.sub(r"^\('|',? 0\)$|'$", "", col) for col in csv_data.columns
@@ -130,4 +139,4 @@ if __name__ == "__main__":
         ):
             pass
 
-    print("✅ All folders processed.")
+    print("✅ All folders processed for Execution Run ID:", EXECUTION_RUN_ID)

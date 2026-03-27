@@ -1200,6 +1200,7 @@ def main():
     print(f"  - Optimizados:               {resultados_resumen['optimizados']}")
     print(f"  - Portafolio máximo:         {resultados_resumen['portafolio_max']}")
     print(f"  - Errores:                   {resultados_resumen['errores']}")
+    print("RUN_ID: ", RUN_ID)
 
     evaluator.close()
 

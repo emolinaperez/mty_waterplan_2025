@@ -20,6 +20,7 @@ import pandas as pd
 import numpy as np
 import time
 import shutil
+import yaml
 
 from pywr.core import Model
 from pywr.parameters import Parameter, load_parameter
@@ -44,7 +45,14 @@ warnings.filterwarnings(
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 JSON_OUTPUT_BASE_DIR = os.path.join(SCRIPT_DIR, "output_json")
-EXECUTION_RUN_ID = "20260306-184644" # Replace with the actual run ID used in optimization
+
+# Load run_id from config.yaml
+CONFIG_PATH = os.path.join(SCRIPT_DIR, "config.yaml")
+with open(CONFIG_PATH, "r") as f:
+    config = yaml.safe_load(f)
+    EXECUTION_RUN_ID = config.get("run_id")
+
+
 JSON_OUTPUT_FOLDER_NAME = f"json_RDM_{EXECUTION_RUN_ID}"
 JSON_OUTPUT_FINAL_DIR = os.path.join(JSON_OUTPUT_BASE_DIR, JSON_OUTPUT_FOLDER_NAME)
 RDM_DIR_PATH = os.path.join(SCRIPT_DIR, "RDM_results")
@@ -505,4 +513,4 @@ if __name__ == "__main__":
             result = future.result()
             tqdm.write(result)
 
-    print("\n✅ All RDM directories processed.")
+    print("\n✅ All RDM directories processed for Execution Run ID:", EXECUTION_RUN_ID)
